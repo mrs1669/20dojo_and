@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.os.postDelayed
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.timer_tab.*
 import java.text.SimpleDateFormat
@@ -27,6 +28,8 @@ class TimerFragment: Fragment(){
 
     private var tappedStartButtonFlag: Int = 0
 
+    private var stopTimerViewFlag: Int = 0
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,13 +46,14 @@ class TimerFragment: Fragment(){
 
         // Handler(スレット間通信：イベントキュー？)
         val runnable = object : Runnable {
-            // メッセージ受信が有った時かな?
             override fun run() {
-                timeValue++                      // 秒カウンタ+1
-                timeToText(timeValue)?.let {        // timeToText()で表示データを作り
-                    timeCountTextView.text = it            // timeText.textへ代入(表示)
+                if (stopTimerViewFlag == 0){
+                    timeValue++                      // 秒カウンタ+1
+                    timeToText(timeValue)?.let {        // timeToText()で表示データを作り
+                        timeCountTextView.text = it            // timeText.textへ代入(表示)
+                    }
+                    handler.postDelayed(this, 1000)  // 1000ｍｓ後に自分にpost
                 }
-                handler.postDelayed(this, 1000)  // 1000ｍｓ後に自分にpost
             }
         }
 
@@ -71,7 +75,11 @@ class TimerFragment: Fragment(){
             handler.removeCallbacks(runnable)
             tappedStartButtonFlag = 0
         }
+    }
 
+    override fun onStop() {
+        super.onStop()
+        stopTimerViewFlag = 1
     }
 
     private fun timeToText(time: Int = 0): String? {
