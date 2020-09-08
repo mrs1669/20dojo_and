@@ -11,7 +11,9 @@
         android:label="Fragment1">
         <action
             android:id="@+id/action_navi_memo_list_to_input_memo_data"
-            app:destination="@id/input_memo_data" />
+            app:destination="@id/input_memo_data"
+            app:popUpTo="@id/navi_memo_list"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -33,6 +35,9 @@
             app:argType="jp.co.cyberagent.dojo2020.models.Memo"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_input_memo_data_to_navi_memo_list"
+            app:destination="@id/navi_memo_list" />
     </fragment>
 
 </navigation>
