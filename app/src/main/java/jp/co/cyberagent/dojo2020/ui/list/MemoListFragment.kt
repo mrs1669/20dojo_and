@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import jp.co.cyberagent.dojo2020.R
@@ -29,11 +30,7 @@ class MemoListFragment() : Fragment() {
 
     lateinit var adapter: RecyclerMemoAdapter
 
-    val listener = object : RecyclerMemoAdapter.Listener {
-        override fun onClickItem(memo: Memo) {
-            memoListViewModel.deleteMemo(memo)
-        }
-    }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = MemoListTabBinding.inflate(layoutInflater)
@@ -49,14 +46,30 @@ class MemoListFragment() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         memoListViewModel.memoMutableList.observe(viewLifecycleOwner, Observer {
-
             val adapter = binding.memoRecyclerView.adapter as RecyclerMemoAdapter?
             adapter?.setMemo(it)
         })
         this.binding = binding
 
+        binding.lifecycleOwner = this.viewLifecycleOwner
+
         binding.floatingActionButton.setOnClickListener {
-            findNavController().navigate(R.id.action_navi_memo_list_to_input_memo_data)
+            val memo = Memo(0,"",0,0,"")
+            val action = MemoListFragmentDirections.actionNaviMemoListToInputMemoData(memo)
+            view.findNavController().navigate(action)
+        }
+
+
+    }
+
+    val listener = object : RecyclerMemoAdapter.Listener {
+        override fun onClickItem(memo: Memo) {
+            memoListViewModel.deleteMemo(memo)
+        }
+
+        override fun onClickEditButton(memo: Memo) {
+            val action = MemoListFragmentDirections.actionNaviMemoListToInputMemoData(memo)
+            view!!.findNavController().navigate(action)
         }
     }
 }

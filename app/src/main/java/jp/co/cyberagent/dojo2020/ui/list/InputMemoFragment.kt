@@ -8,10 +8,16 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import jp.co.cyberagent.dojo2020.R
+import jp.co.cyberagent.dojo2020.databinding.FragmentInputMemoBinding
 import jp.co.cyberagent.dojo2020.models.Memo
 
-class InputMemoFragment: Fragment() {
+class InputMemoFragment : Fragment() {
+    private val args: InputMemoFragmentArgs by navArgs()
 
     private val memoListViewModel by viewModels<MemoListViewModel> {
         MemoListViewModelFactory(
@@ -21,12 +27,20 @@ class InputMemoFragment: Fragment() {
         )
     }
 
+    private lateinit var binding: FragmentInputMemoBinding
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_input_memo,container,false)
+        binding = FragmentInputMemoBinding.inflate(inflater,container,false)
+        binding.viewModel = memoListViewModel
+        binding.lifecycleOwner = this.viewLifecycleOwner
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        memoListViewModel.editMemo.value=args.editMemoData
 
         val submitButton = view.findViewById<Button>(R.id.btInputMemoSubmit)
         submitButton.setOnClickListener {
@@ -39,8 +53,13 @@ class InputMemoFragment: Fragment() {
 //                } else {
 //                    Log.i("test", "null")
 //                }
-            val memo = Memo(0, title, hour.toInt(), minute.toInt(), description)
-            memoListViewModel.saveMemo(memo)
+            val id = memoListViewModel.editMemo.value!!.id
+            val memo = Memo(id , title, hour.toInt(), minute.toInt(), description)
+            when(id) {
+                0 -> memoListViewModel.saveMemo(memo)
+                else -> memoListViewModel.updateMemo(memo)
+            }
+
         }
     }
 }

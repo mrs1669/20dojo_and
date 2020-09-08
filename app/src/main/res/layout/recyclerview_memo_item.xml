@@ -66,13 +66,28 @@
                 android:text="@{viewModel.description}"
                 />
 
-            <Button
-                android:id="@+id/btDeleteMemo"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:text="削除"
-                />
+            <LinearLayout
+                android:id="@+id/llBts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                >
+                <Button
+                    android:id="@+id/btDeleteMemo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:text="削除"
+                    />
+                <Button
+                    android:id="@+id/btEditMemo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:text="編集"
+                    />
+            </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </layout>

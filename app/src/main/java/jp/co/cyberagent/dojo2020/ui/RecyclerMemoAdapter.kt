@@ -42,6 +42,10 @@ class RecyclerMemoAdapter(
         holder.itemView.btDeleteMemo.setOnClickListener{
             listener.onClickItem(memo)
         }
+
+        holder.itemView.btEditMemo.setOnClickListener{
+            listener.onClickEditButton(memo)
+        }
     }
 
     fun setMemo(memo: List<Memo>) {
@@ -62,6 +66,6 @@ class RecyclerMemoAdapter(
 
     interface  Listener {
         fun onClickItem(memo:Memo)
+        fun onClickEditButton(memo: Memo)
     }
-
 }
