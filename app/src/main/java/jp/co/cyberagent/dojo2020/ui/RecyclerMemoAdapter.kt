@@ -1,5 +1,6 @@
 package jp.co.cyberagent.dojo2020.ui
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +31,7 @@ class RecyclerMemoAdapter(initList: List<Memo> = emptyList()) : RecyclerView.Ada
         val memo = memoList[position]
         holder.binding.viewModel = Memo(memo.id,memo.title,memo.hour,memo.minute,memo.description)
 
-//        holder.view.MemoItem
+        holder.itemView.setOnClickListener(MemoItemClickListener(memo.id))
     }
 
     fun setMemo(memo: List<Memo>) {
@@ -38,11 +39,12 @@ class RecyclerMemoAdapter(initList: List<Memo> = emptyList()) : RecyclerView.Ada
         notifyDataSetChanged()
     }
 
-//    private inner class MemoItemClickListener(position: Int) : View.OnClickListener {
-//        override fun onClick(view: View) {
-//
-//        }
-//    }
+    private class MemoItemClickListener(position: Int) : View.OnClickListener {
+        val position : Int = position
+        override fun onClick(view: View) {
+            Log.i("MemoItemClickListener", "$position")
+        }
+    }
 
     override fun getItemCount(): Int = memoList.size
 
