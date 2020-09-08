@@ -11,8 +11,8 @@
 
     <!-- Timer View -->
     <string name="timerCountTextView">00:00:00</string>
-    <string name="StartButton">Start</string>
-    <string name="StopButton">Stop</string>
+    <string name="timerStartButton">Start</string>
+    <string name="timerStopButton">Stop</string>
     <string name="timerStartButtonDescription">スタートボタンです</string>
     <string name="timerStopButtonDescription">ストップボタンです</string>
 
