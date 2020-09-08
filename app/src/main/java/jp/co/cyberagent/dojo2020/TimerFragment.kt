@@ -71,7 +71,6 @@ class TimerFragment: Fragment(){
             handler.removeCallbacks(runnable)
             tappedStartButtonFlag = 0
         }
-
     }
 
     private fun timeToText(time: Int = 0): String? {
