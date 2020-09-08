@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     android:orientation="vertical">
 
 
@@ -23,6 +24,7 @@
             android:fontFamily="sans-serif-thin"
             android:text="@string/timerCountTextView"
             android:textAlignment="center"
+            android:textColor="#FFFFFF"
             android:textSize="96sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -43,11 +45,12 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
+            android:background="@android:drawable/ic_media_play"
+            android:backgroundTint="#00FFFF"
             android:contentDescription="@string/timerStartButtonDescription"
-            app:background="@drawable/github_icon"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/stopButton"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/stopButton"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
@@ -58,12 +61,16 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
+            android:background="@android:drawable/ic_media_pause"
+            android:backgroundTint="#FF80FF"
             android:contentDescription="@string/timerStopButtonDescription"
-            app:background="@drawable/twitter_icon"
+            android:scaleType="center"
+            android:tint="#FF0000"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/startButton"
+            app:layout_constraintEnd_toStartOf="@id/startButton"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
