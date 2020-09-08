@@ -28,4 +28,10 @@ class MemoListViewModel(context: Context): ViewModel() {
             val memoData = memoRepository.loadAllMemo()
         }
     }
+
+    fun deleteMemo(memo: Memo) =
+        viewModelScope.launch(Dispatchers.IO) {
+            memoRepository.deleteMemo(memo)
+        }
+
 }

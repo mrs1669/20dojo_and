@@ -1,6 +1,8 @@
 package jp.co.cyberagent.dojo2020.ui.list
 
 import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +13,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import jp.co.cyberagent.dojo2020.R
 import jp.co.cyberagent.dojo2020.databinding.MemoListTabBinding
+import jp.co.cyberagent.dojo2020.models.Memo
 import jp.co.cyberagent.dojo2020.ui.RecyclerMemoAdapter
 
-class MemoListFragment: Fragment(){
+class MemoListFragment() : Fragment() {
+
     private lateinit var binding: MemoListTabBinding
     private val memoListViewModel by viewModels<MemoListViewModel> {
         MemoListViewModelFactory(
@@ -25,13 +29,19 @@ class MemoListFragment: Fragment(){
 
     lateinit var adapter: RecyclerMemoAdapter
 
+    val listener = object : RecyclerMemoAdapter.Listener {
+        override fun onClickItem(memo: Memo) {
+            memoListViewModel.deleteMemo(memo)
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = MemoListTabBinding.inflate(layoutInflater)
 
         binding.viewModel = memoListViewModel
         val layout = LinearLayoutManager(context)
         binding.memoRecyclerView.layoutManager = layout
-        binding.memoRecyclerView.adapter = RecyclerMemoAdapter()
+        binding.memoRecyclerView.adapter = RecyclerMemoAdapter(listener = listener)
         return binding.root
     }
 
@@ -39,6 +49,7 @@ class MemoListFragment: Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         memoListViewModel.memoMutableList.observe(viewLifecycleOwner, Observer {
+
             val adapter = binding.memoRecyclerView.adapter as RecyclerMemoAdapter?
             adapter?.setMemo(it)
         })

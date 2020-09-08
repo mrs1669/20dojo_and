@@ -7,4 +7,8 @@ interface MemoDataSource {
     fun loadAllMemo(): LiveData<List<Memo>>
 
     fun inputMemo(memo: Memo)
+
+    fun deleteMemo(memo: Memo)
+
+    fun updateMemo(memo: Memo)
 }

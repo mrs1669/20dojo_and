@@ -13,8 +13,12 @@ import jp.co.cyberagent.dojo2020.databinding.RecyclerviewMemoItemBinding
 import jp.co.cyberagent.dojo2020.models.Memo
 import jp.co.cyberagent.dojo2020.ui.list.MemoListViewModel
 import jp.co.cyberagent.dojo2020.ui.list.MemoListViewModelFactory
+import kotlinx.android.synthetic.main.recyclerview_memo_item.view.*
 
-class RecyclerMemoAdapter(initList: List<Memo> = emptyList()) : RecyclerView.Adapter<RecyclerMemoAdapter.RecyclerViewHolder>() {
+class RecyclerMemoAdapter(
+    initList: List<Memo> = emptyList(),
+    private val listener: Listener
+) : RecyclerView.Adapter<RecyclerMemoAdapter.RecyclerViewHolder>() {
 
     var memoList: List<Memo> = initList
 
@@ -35,7 +39,9 @@ class RecyclerMemoAdapter(initList: List<Memo> = emptyList()) : RecyclerView.Ada
         val memo = memoList[position]
         holder.binding.viewModel = Memo(memo.id,memo.title,memo.hour,memo.minute,memo.description)
 
-        holder.itemView.setOnClickListener(MemoItemClickListener(memo.id))
+        holder.itemView.btDeleteMemo.setOnClickListener{
+            listener.onClickItem(memo)
+        }
     }
 
     fun setMemo(memo: List<Memo>) {
@@ -43,14 +49,19 @@ class RecyclerMemoAdapter(initList: List<Memo> = emptyList()) : RecyclerView.Ada
         notifyDataSetChanged()
     }
 
-    private class MemoItemClickListener(position: Int) : View.OnClickListener {
+    inner private class MemoItemClickListener(position: Int) : View.OnClickListener {
         val position : Int = position
         override fun onClick(view: View) {
             Log.i("MemoItemClickListener", "$position")
+            listener
 //            holder.
         }
     }
 
     override fun getItemCount(): Int = memoList.size
+
+    interface  Listener {
+        fun onClickItem(memo:Memo)
+    }
 
 }

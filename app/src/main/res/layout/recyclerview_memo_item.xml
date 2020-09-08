@@ -4,6 +4,7 @@
     >
 
     <data>
+        <import type="android.view.View"/>
         <variable
         name = "viewModel"
         type="jp.co.cyberagent.dojo2020.models.Memo"/>
@@ -63,6 +64,14 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@{viewModel.description}"
+                />
+
+            <Button
+                android:id="@+id/btDeleteMemo"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:text="削除"
                 />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
