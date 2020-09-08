@@ -28,7 +28,6 @@ class InputMemoFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         val submitButton = view.findViewById<Button>(R.id.btInputMemoSubmit)
         submitButton.setOnClickListener {
             val title = view.findViewById<EditText>(R.id.etInputMemoTitle).text.toString()

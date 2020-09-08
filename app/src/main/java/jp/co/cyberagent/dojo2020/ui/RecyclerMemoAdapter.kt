@@ -1,14 +1,18 @@
 package jp.co.cyberagent.dojo2020.ui
 
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import jp.co.cyberagent.dojo2020.R
 import jp.co.cyberagent.dojo2020.databinding.RecyclerviewMemoItemBinding
 import jp.co.cyberagent.dojo2020.models.Memo
+import jp.co.cyberagent.dojo2020.ui.list.MemoListViewModel
+import jp.co.cyberagent.dojo2020.ui.list.MemoListViewModelFactory
 
 class RecyclerMemoAdapter(initList: List<Memo> = emptyList()) : RecyclerView.Adapter<RecyclerMemoAdapter.RecyclerViewHolder>() {
 
@@ -43,6 +47,7 @@ class RecyclerMemoAdapter(initList: List<Memo> = emptyList()) : RecyclerView.Ada
         val position : Int = position
         override fun onClick(view: View) {
             Log.i("MemoItemClickListener", "$position")
+//            holder.
         }
     }
 
