@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">dojo2020</string>
+    <string name="app_name">メモ (CA Tech Dojo)</string>
     <!-- TODO: Remove or change this placeholder text -->
     
     <string name="timer_fragment">TimerFragmentを表示</string>
