@@ -10,7 +10,7 @@
     <string name="tv_input_memo_time">作業時間</string>
 
     <!-- Timer View -->
-    <string name="timerCountTextView">0</string>
+    <string name="timerCountTextView">00:00:00</string>
     <string name="startButton">Start</string>
     <string name="stopButton">Stop</string>
 
