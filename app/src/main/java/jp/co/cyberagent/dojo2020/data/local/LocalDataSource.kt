@@ -9,8 +9,7 @@ import jp.co.cyberagent.dojo2020.data.local.db.MemoEntity
 import jp.co.cyberagent.dojo2020.models.Memo
 
 
-class LocalDataSource (private val database: AppDatabase):
-    MemoDataSource {
+class LocalDataSource (private val database: AppDatabase): MemoDataSource {
     override fun loadAllMemo(): LiveData<List<Memo>> {
         Log.i("test:", "in LocalDatasource loadAllMemo()" )
         return database.memoDao().loadAllMemo().map {
