@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.drawToBitmap
 import androidx.fragment.app.Fragment
@@ -79,9 +80,9 @@ class ProfileFragment : Fragment() {
                 edit_github_account.visibility = View.VISIBLE
                 edit_twitter_account.visibility = View.VISIBLE
 
-//                edit_name.text = person_name.editableText
-//                edit_github_account.text = github_account.editableText
-//                edit_twitter_account.text = twitter_account.editableText
+                edit_name.setText(person_name.text, TextView.BufferType.NORMAL)
+                edit_github_account.setText(github_account.text, TextView.BufferType.NORMAL)
+                edit_twitter_account.setText(twitter_account.text, TextView.BufferType.NORMAL)
 
                 param = 0
 
