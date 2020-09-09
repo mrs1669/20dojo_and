@@ -5,7 +5,7 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import jp.co.cyberagent.dojo2020.R
@@ -57,8 +57,8 @@ class TimerFragment: Fragment(){
             }
         }
 
-        val startButton = view.findViewById<Button>(R.id.startButton);
-        val stopButton = view.findViewById<Button>(R.id.stopButton);
+        val startButton = view.findViewById<ImageButton>(R.id.startButton);
+        val stopButton = view.findViewById<ImageButton>(R.id.stopButton);
 
         val timerText = view.findViewById<TextView>(R.id.timeCountTextView);
 
@@ -71,8 +71,11 @@ class TimerFragment: Fragment(){
             }
         }
 
-        stopButton.setOnClickListener{
+        stopButton.setOnClickListener {
             handler.removeCallbacks(runnable)
+            if (tappedStartButtonFlag == 1){
+                startButton.setBackgroundResource(R.drawable.restart_icon)
+            }
             tappedStartButtonFlag = 0
         }
     }
