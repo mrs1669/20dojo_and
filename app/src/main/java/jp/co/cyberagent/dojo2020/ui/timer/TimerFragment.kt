@@ -46,13 +46,12 @@ class TimerFragment: Fragment(){
 
         delay = 0;
         period = 100;
-
-        // Handler(スレット間通信：イベントキュー？)
+        
         val runnable = object : Runnable {
             override fun run() {
                 if (stopTimerViewFlag == 0){
                     timerViewModel.applyMutableTimeCountTextViewLiveData()
-                    handler.postDelayed(this, 50)  // 50ｍｓ後に自分にpost
+                    handler.postDelayed(this, 36)  // 36ｍｓ後に自分にpost
                 }
             }
         }
