@@ -51,11 +51,8 @@ class TimerFragment: Fragment(){
         val runnable = object : Runnable {
             override fun run() {
                 if (stopTimerViewFlag == 0){
-                    timerViewModel.timeCountTextViewLiveData.observe(viewLifecycleOwner){
-                        timeCountTextView.text = it
-                    }
+                    timerViewModel.applyMutableTimeCountTextViewLiveData()
                     handler.postDelayed(this, 1000)  // 1000ｍｓ後に自分にpost
-                    Log.d("as","hello")
                 }
             }
         }
@@ -74,7 +71,6 @@ class TimerFragment: Fragment(){
                 tappedStartButtonFlag = 1
             }
             timerViewModel.changeToHello()
-            timerViewModel.applyMutableTimeCountTextViewLiveData()
         }
 
         stopButton.setOnClickListener {
@@ -83,6 +79,10 @@ class TimerFragment: Fragment(){
                 startButton.setBackgroundResource(R.drawable.restart_icon)
             }
             tappedStartButtonFlag = 0
+        }
+
+        timerViewModel.timeCountTextViewLiveData.observe(viewLifecycleOwner){
+            timeCountTextView.text = it
         }
     }
 
