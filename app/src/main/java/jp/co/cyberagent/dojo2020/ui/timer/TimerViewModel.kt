@@ -55,12 +55,12 @@ class TimerViewModel : ViewModel(){
             val m = time % 3600000 / 60000
             val s = time % 60000 / 1000
             val ms = time % 1000
-            "%1$02d:%2$02d:%3$02d:%4$03d:".format(h, m, s, ms)  // 表示に整形
+            "%1$02d:%2$02d:%3$02d:%4$03d".format(h, m, s, ms)  // 表示に整形
         }
     }
 
-    private fun getFormattedElapsedTime(){
-        
+    private fun getFormattedElapsedTime(): String{
+        return timeToText(getElapsedTimeMills()) ?: "ElapsedTime cannot refer." // try to use Elvis operator.
     }
 
     fun changeToHello() {
@@ -68,7 +68,7 @@ class TimerViewModel : ViewModel(){
     }
 
     fun applyMutableTimeCountTextViewLiveData() {
-        mutableTimeCountTextViewLiveData.value = getStringElapsedTimeMills()
+        mutableTimeCountTextViewLiveData.value = getFormattedElapsedTime()
     }
 
 }
