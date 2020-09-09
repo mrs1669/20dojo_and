@@ -1,4 +1,4 @@
-package jp.co.cyberagent.dojo2020
+package jp.co.cyberagent.dojo2020.ui.profile
 
 // Kotlin Android Extensions
 import android.app.Activity.RESULT_OK
@@ -12,11 +12,12 @@ import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.drawToBitmap
 import androidx.fragment.app.Fragment
+import jp.co.cyberagent.dojo2020.R
+import jp.co.cyberagent.dojo2020.SelectPhoto
 import kotlinx.android.synthetic.main.profile_tab.*
 import java.io.ByteArrayOutputStream
 

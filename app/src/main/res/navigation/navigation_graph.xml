@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/navi_profile"
-        android:name="jp.co.cyberagent.dojo2020.ProfileFragment"
+        android:name="jp.co.cyberagent.dojo2020.ui.profile.ProfileFragment"
         android:label="Fragment3"/>
 
     <fragment
