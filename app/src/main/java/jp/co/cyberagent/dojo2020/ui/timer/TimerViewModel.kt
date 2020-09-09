@@ -7,11 +7,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class TimerViewModel : ViewModel(){
+    
     private val mutableTempTextView: MutableLiveData<String> = MutableLiveData()
     val tempTextView: LiveData<String> = mutableTempTextView
 
     fun changeToHello() {
         mutableTempTextView.value = "Hello"
-        //return if (mutableTempTextView.value != null) mutableTempTextView.value!! else "test"
     }
+
 }
