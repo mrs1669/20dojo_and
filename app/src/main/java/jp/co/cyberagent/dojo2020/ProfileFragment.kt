@@ -72,8 +72,8 @@ class ProfileFragment : Fragment() {
                 github_account.visibility = View.GONE
                 twitter_account.visibility = View.GONE
 
-                github_image.visibility = View.INVISIBLE
-                twitter_image.visibility = View.INVISIBLE
+                github_image.visibility = View.GONE
+                twitter_image.visibility = View.GONE
 
                 edit_name.visibility = View.VISIBLE
                 edit_github_account.visibility = View.VISIBLE
