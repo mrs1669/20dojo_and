@@ -1,14 +1,24 @@
 package jp.co.cyberagent.dojo2020.ui
 
+import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import jp.co.cyberagent.dojo2020.R
 import jp.co.cyberagent.dojo2020.databinding.RecyclerviewMemoItemBinding
 import jp.co.cyberagent.dojo2020.models.Memo
+import jp.co.cyberagent.dojo2020.ui.list.MemoListViewModel
+import jp.co.cyberagent.dojo2020.ui.list.MemoListViewModelFactory
+import kotlinx.android.synthetic.main.recyclerview_memo_item.view.*
 
-class RecyclerMemoAdapter(initList: List<Memo> = emptyList()) : RecyclerView.Adapter<RecyclerMemoAdapter.RecyclerViewHolder>() {
+class RecyclerMemoAdapter(
+    initList: List<Memo> = emptyList(),
+    private val listener: Listener
+) : RecyclerView.Adapter<RecyclerMemoAdapter.RecyclerViewHolder>() {
 
     var memoList: List<Memo> = initList
 
@@ -28,6 +38,14 @@ class RecyclerMemoAdapter(initList: List<Memo> = emptyList()) : RecyclerView.Ada
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
         val memo = memoList[position]
         holder.binding.viewModel = Memo(memo.id,memo.title,memo.hour,memo.minute,memo.description)
+
+        holder.itemView.btDeleteMemo.setOnClickListener{
+            listener.onClickItem(memo)
+        }
+
+        holder.itemView.btEditMemo.setOnClickListener{
+            listener.onClickEditButton(memo)
+        }
     }
 
     fun setMemo(memo: List<Memo>) {
@@ -35,6 +53,19 @@ class RecyclerMemoAdapter(initList: List<Memo> = emptyList()) : RecyclerView.Ada
         notifyDataSetChanged()
     }
 
+    inner private class MemoItemClickListener(position: Int) : View.OnClickListener {
+        val position : Int = position
+        override fun onClick(view: View) {
+            Log.i("MemoItemClickListener", "$position")
+            listener
+//            holder.
+        }
+    }
+
     override fun getItemCount(): Int = memoList.size
 
+    interface  Listener {
+        fun onClickItem(memo:Memo)
+        fun onClickEditButton(memo: Memo)
+    }
 }

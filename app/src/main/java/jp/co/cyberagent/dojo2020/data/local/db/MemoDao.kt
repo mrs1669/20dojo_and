@@ -10,4 +10,10 @@ interface MemoDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(memoEntity: MemoEntity)
+
+    @Delete
+    fun delete(memoEntity: MemoEntity)
+
+    @Update
+    fun updateMemo(memoEntity: MemoEntity)
 }

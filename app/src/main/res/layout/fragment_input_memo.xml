@@ -1,56 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+        <data>
+                <import type="android.view.View"/>
+                <variable
+                    name = "viewModel"
+                    type="jp.co.cyberagent.dojo2020.ui.list.MemoListViewModel"/>
+        </data>
 
-        <EditText
-            android:id="@+id/etInputMemoTitle"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/etInputMemoHour"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:inputType="number"
-            app:layout_constraintTop_toBottomOf="@+id/etInputMemoTitle"
-            tools:layout_editor_absoluteX="0dp" />
-
-        <EditText
-            android:id="@+id/etInputMemoMinute"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:inputType="number"
-            app:layout_constraintTop_toBottomOf="@+id/etInputMemoHour"
-            tools:layout_editor_absoluteX="0dp" />
-
-        <EditText
-            android:id="@+id/etDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:inputType="text"
-            app:layout_constraintTop_toBottomOf="@+id/etInputMemoMinute"
-            tools:layout_editor_absoluteX="0dp" />
-
-        <Button
-            android:id="@+id/btInputMemoSubmit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:text="追加"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etDescription" />
+            android:layout_height="match_parent">
 
 
+                <EditText
+                    android:id="@+id/etInputMemoTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.editMemo.title}"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etInputMemoHour"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:inputType="number"
+                    android:text="@{Integer.toString(viewModel.editMemo.hour)}"
+                    app:layout_constraintTop_toBottomOf="@+id/etInputMemoTitle"
+                    tools:layout_editor_absoluteX="0dp" />
+
+                <EditText
+                    android:id="@+id/etInputMemoMinute"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:inputType="number"
+                    android:text="@{Integer.toString(viewModel.editMemo.minute)}"
+                    app:layout_constraintTop_toBottomOf="@+id/etInputMemoHour"
+                    tools:layout_editor_absoluteX="0dp" />
+
+                <EditText
+                    android:id="@+id/etDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:inputType="text"
+                    android:text="@{viewModel.editMemo.description}"
+                    app:layout_constraintTop_toBottomOf="@+id/etInputMemoMinute"
+                    tools:layout_editor_absoluteX="0dp" />
+
+                <Button
+                    android:id="@+id/btInputMemoSubmit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:text="追加"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etDescription" />
 
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

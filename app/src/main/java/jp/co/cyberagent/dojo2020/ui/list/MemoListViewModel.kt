@@ -12,6 +12,10 @@ import kotlinx.coroutines.launch
 class MemoListViewModel(context: Context): ViewModel() {
     private val memoRepository: Repository
     val memoMutableList : LiveData<List<Memo>>
+    val editMemo : MutableLiveData<Memo> by lazy {
+        MutableLiveData<Memo>()
+    }
+
 
     init {
         memoRepository = DI.injectRepository(context)
@@ -27,5 +31,13 @@ class MemoListViewModel(context: Context): ViewModel() {
         viewModelScope.launch {
             val memoData = memoRepository.loadAllMemo()
         }
+    }
+
+    fun deleteMemo(memo: Memo) = viewModelScope.launch(Dispatchers.IO) {
+        memoRepository.deleteMemo(memo)
+    }
+
+    fun updateMemo(memo: Memo) = viewModelScope.launch(Dispatchers.IO) {
+        memoRepository.updateMemo(memo)
     }
 }

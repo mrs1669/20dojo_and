@@ -20,9 +20,23 @@ class LocalDataSource (private val database: AppDatabase):
     }
 
     override fun inputMemo (memo: Memo) {
-        val forInsertMemo = MemoEntity.createForInsert(memo.title, memo.hour, memo.minute, memo.description)
+        val forInsertMemo = MemoEntity.createForInsert(0,memo.title, memo.hour, memo.minute, memo.description)
         Log.i("test:LocalDatasource", memo.title )
 
         database.memoDao().insert(forInsertMemo)
+    }
+
+    override fun deleteMemo (memo: Memo) {
+        val forInsertMemo = MemoEntity.createForInsert(memo.id , memo.title, memo.hour, memo.minute, memo.description)
+        Log.i("test:LocalDatasource", memo.title )
+
+        database.memoDao().delete(forInsertMemo)
+    }
+
+    override fun updateMemo (memo: Memo) {
+        val forInsertMemo = MemoEntity.createForInsert(memo.id,  memo.title, memo.hour, memo.minute, memo.description)
+        Log.i("test:LocalDatasource", memo.title )
+
+        database.memoDao().updateMemo(forInsertMemo)
     }
 }

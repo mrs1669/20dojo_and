@@ -14,9 +14,9 @@ data class MemoEntity(
     @ColumnInfo(name = "description") val description: String
 ) {
     companion object {
-        fun createForInsert(title: String, hour: Int, minute: Int, description: String): MemoEntity {
+        fun createForInsert(id: Int = 0, title: String, hour: Int, minute: Int, description: String): MemoEntity {
             return MemoEntity(
-                0,
+                id,
                 title,
                 hour,
                 minute,
