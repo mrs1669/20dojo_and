@@ -25,7 +25,7 @@
             android:text="@string/timerCountTextView"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:textSize="96sp"
+            android:textSize="54sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
