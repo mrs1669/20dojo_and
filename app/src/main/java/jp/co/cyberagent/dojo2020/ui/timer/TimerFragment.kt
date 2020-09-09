@@ -32,6 +32,8 @@ class TimerFragment: Fragment(){
 
     private val timerViewModel: TimerViewModel by viewModels()
 
+    private var isTimerRunning: Boolean = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.timer_tab, container, false)
@@ -52,12 +54,18 @@ class TimerFragment: Fragment(){
             }
         }
 
-        startButton.setOnClickListener{
-            if (tappedStartButtonFlag == 0){
-                handler.post(runnable)
-                tappedStartButtonFlag = 1
+
+        if(isTimerRunning){
+            handler.post(runnable)
+        }else{
+            startButton.setOnClickListener{
+                if (tappedStartButtonFlag == 0){
+                    handler.post(runnable)
+                    tappedStartButtonFlag = 1
+                    isTimerRunning = true
+                }
+                timerViewModel.setCurrentTimeMills()
             }
-            timerViewModel.setCurrentTimeMills()
         }
 
         stopButton.setOnClickListener {
