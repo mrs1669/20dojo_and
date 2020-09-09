@@ -9,9 +9,6 @@ import java.util.*
 
 class TimerViewModel : ViewModel(){
 
-    private val mutableTempTextViewLiveData: MutableLiveData<String> = MutableLiveData()
-    val tempTextViewLiveData: LiveData<String> = mutableTempTextViewLiveData
-
     private val mutableTimeCountTextViewLiveData: MutableLiveData<String> = MutableLiveData()
     val timeCountTextViewLiveData: LiveData<String> = mutableTimeCountTextViewLiveData
 
@@ -59,10 +56,6 @@ class TimerViewModel : ViewModel(){
 
     private fun getFormattedElapsedTime(): String{
         return timeToText(getElapsedTimeMills()) ?: "ElapsedTime cannot refer." // try to use Elvis operator.
-    }
-
-    fun changeToHello() {
-        mutableTempTextViewLiveData.value = "Hello"
     }
 
     fun applyMutableTimeCountTextViewLiveData() {
