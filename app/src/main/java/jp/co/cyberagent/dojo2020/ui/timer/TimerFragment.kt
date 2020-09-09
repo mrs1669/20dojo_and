@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import jp.co.cyberagent.dojo2020.R
+import jp.co.cyberagent.dojo2020.ui.list.MemoListViewModel
 import kotlinx.android.synthetic.main.timer_tab.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -30,16 +33,18 @@ class TimerFragment: Fragment(){
 
     private var stopTimerViewFlag: Int = 0
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+    private val timerViewModel: TimerViewModel by viewModels()
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.timer_tab, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+
 
         delay = 0;
         period = 100;
@@ -70,7 +75,7 @@ class TimerFragment: Fragment(){
                 handler.post(runnable)
                 tappedStartButtonFlag = 1
             }
-            //tempTextView.text
+            timerViewModel.changeToHello()
         }
 
         stopButton.setOnClickListener {
@@ -85,6 +90,13 @@ class TimerFragment: Fragment(){
     override fun onStop() {
         super.onStop()
         stopTimerViewFlag = 1
+    }
+
+    override fun onStart() {
+        super.onStart()
+        timerViewModel.tempTextView.observe(viewLifecycleOwner){
+            tempTextView.text = it
+        }
     }
 
     private fun timeToText(time: Int = 0): String? {
