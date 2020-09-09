@@ -38,16 +38,31 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        /** SelectPhotoってなんだろう？Activity継承してるけどlayoutとかonCreateないし、
+         * startActivityForResultするのはこのFragmentでやっても良いかなと思った
+         */
         val selectPhoto = SelectPhoto(this, edit_image)
 
+        /**
+         * こういった、Viewに直接的に関係しないロジックはViewModelに移行できると良さそうだね
+         */
         //SharedPreferenceを使うためのインスタンス
         val dataStore: SharedPreferences? = activity?.getPreferences(Context.MODE_PRIVATE)
+
+        /**
+         * 命名は結構直感的にわかるようにするのが良いかなと思った！現状は0と1しかないっぽいから、
+         * isClicked: Boolean　にしてもよさそうだね
+         * もし3つ以上状態があるのならEnumを使うほうが状態がわかりやすくてお勧めかな
+         */
         //ボタンの押された状態を管理するフラグ
         var param = 1
 
         //イメージは編集時にしかクリックできないようにする
          edit_image.isEnabled = false
 
+        /**
+         * "name"とか、タイポするかもしれない定数は const val で定義しちゃうといいかも
+         */
         //端末に保存された前回のアプリデータをgetStringで取得する。なければdefValueの値をとってくる
         person_name.text = dataStore?.getString("name", "名前")
         github_account.text = dataStore?.getString("github_account", "githubアカウント")
@@ -92,6 +107,9 @@ class ProfileFragment : Fragment() {
 
                 edit_image.isEnabled = false
 
+                /**
+                 * edit_name.text.isNotEmpty() っていう便利なメソッドがあるのじゃよ
+                 */
                 //編集ボタンが押された時に前の内容が消えないようにする
                 if (edit_name.text.toString() != "" && edit_github_account.text.toString() != "" && edit_twitter_account.text.toString() != "") {
 
