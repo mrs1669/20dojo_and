@@ -2,6 +2,7 @@ package jp.co.cyberagent.dojo2020.ui.timer
 
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +24,7 @@ class TimerFragment: Fragment(){
     private val handler = Handler()
 
     private var delay: Long = 0
-    private  var period:kotlin.Long = 0
+    private var period:kotlin.Long = 0
 
     private var timeValue = 0                              // 秒カウンター
 
@@ -42,7 +43,7 @@ class TimerFragment: Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        
+
         delay = 0;
         period = 100;
 
@@ -52,7 +53,7 @@ class TimerFragment: Fragment(){
                 if (stopTimerViewFlag == 0){
                     timeValue++                      // 秒カウンタ+1
                     timeToText(timeValue)?.let {        // timeToText()で表示データを作り
-                        timeCountTextView.text = it            // timeText.textへ代入(表示)
+                        timerViewModel.getCurrentDate()          // timeText.textへ代入(表示)
                     }
                     handler.postDelayed(this, 1000)  // 1000ｍｓ後に自分にpost
                 }
@@ -73,6 +74,8 @@ class TimerFragment: Fragment(){
                 tappedStartButtonFlag = 1
             }
             timerViewModel.changeToHello()
+            // timerViewModel.applyMutableTimeCountTextViewLiveData()
+            // timerViewModel.getNowDate()
         }
 
         stopButton.setOnClickListener {
@@ -93,6 +96,9 @@ class TimerFragment: Fragment(){
         super.onStart()
         timerViewModel.tempTextViewLiveData.observe(viewLifecycleOwner){
             tempTextView.text = it
+        }
+        timerViewModel.tempTimeCountTextViewLiveData.observe(viewLifecycleOwner){
+            timeCountTextView.text = it
         }
     }
 
