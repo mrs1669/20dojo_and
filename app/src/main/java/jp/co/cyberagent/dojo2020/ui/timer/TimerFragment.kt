@@ -52,10 +52,6 @@ class TimerFragment: Fragment(){
             }
         }
 
-        val startButton = view.findViewById<ImageButton>(R.id.startButton);
-        val stopButton = view.findViewById<ImageButton>(R.id.stopButton);
-
-
         startButton.setOnClickListener{
             if (tappedStartButtonFlag == 0){
                 handler.post(runnable)
