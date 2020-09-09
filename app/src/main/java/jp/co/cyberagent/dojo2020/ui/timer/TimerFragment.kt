@@ -42,10 +42,7 @@ class TimerFragment: Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-
-
+        
         delay = 0;
         period = 100;
 

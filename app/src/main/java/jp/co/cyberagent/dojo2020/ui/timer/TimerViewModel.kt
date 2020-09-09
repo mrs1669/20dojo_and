@@ -18,4 +18,8 @@ class TimerViewModel : ViewModel(){
     private val mutableTimeCountTextViewLiveData: MutableLiveData<String> = MutableLiveData()
     val tempTimeCountTextViewLiveData: LiveData<String> = mutableTimeCountTextViewLiveData
 
+    fun applyMutableTimeCountTextViewLiveData() {
+
+    }
+
 }
