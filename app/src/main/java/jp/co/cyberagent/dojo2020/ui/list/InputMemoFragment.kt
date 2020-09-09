@@ -45,6 +45,10 @@ class InputMemoFragment : Fragment() {
 
         memoListViewModel.editMemo.value=args.editMemoData
 
+        /**
+         * せっかくDataBinding使っているから、binding.btInputMemoSubmit みたいな感じでviewの参照を得るほうが簡単で、
+         * かつ軽量なアクセスだから良いと思うよ！
+         */
         val submitButton = view.findViewById<Button>(R.id.btInputMemoSubmit)
         submitButton.setOnClickListener {
             val title = view.findViewById<EditText>(R.id.etInputMemoTitle).text.toString()

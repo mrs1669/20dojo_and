@@ -30,8 +30,6 @@ class MemoListFragment() : Fragment() {
 
     lateinit var adapter: RecyclerMemoAdapter
 
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = MemoListTabBinding.inflate(layoutInflater)
 
@@ -49,6 +47,10 @@ class MemoListFragment() : Fragment() {
             val adapter = binding.memoRecyclerView.adapter as RecyclerMemoAdapter?
             adapter?.setMemo(it)
         })
+
+        /**
+         * これは何してるやつだろう？特にいらないかも
+         */
         this.binding = binding
 
         binding.lifecycleOwner = this.viewLifecycleOwner
@@ -56,6 +58,9 @@ class MemoListFragment() : Fragment() {
         binding.floatingActionButton.setOnClickListener {
             val memo = Memo(0,"",0,0,"")
             val action = MemoListFragmentDirections.actionNaviMemoListToInputMemoData(memo)
+            /**
+             * Fragment.findNavController() っていうのがあるから、ここは `view` はいらないかも
+             */
             view.findNavController().navigate(action)
         }
 
@@ -69,6 +74,9 @@ class MemoListFragment() : Fragment() {
 
         override fun onClickEditButton(memo: Memo) {
             val action = MemoListFragmentDirections.actionNaviMemoListToInputMemoData(memo)
+            /**
+             * ここもだね、なるべく強制アンラップ(!!)はしない方がよいかな？
+             */
             view!!.findNavController().navigate(action)
         }
     }
