@@ -46,7 +46,7 @@ class TimerFragment: Fragment(){
 
         delay = 0;
         period = 100;
-        
+
         val runnable = object : Runnable {
             override fun run() {
                 if (stopTimerViewFlag == 0){
@@ -69,7 +69,7 @@ class TimerFragment: Fragment(){
                 handler.post(runnable)
                 tappedStartButtonFlag = 1
             }
-            timerViewModel.changeToHello()
+            timerViewModel.setCurrentTimeMills()
         }
 
         stopButton.setOnClickListener {
@@ -82,6 +82,7 @@ class TimerFragment: Fragment(){
 
         timerViewModel.timeCountTextViewLiveData.observe(viewLifecycleOwner){
             timeCountTextView.text = it
+            Log.i("sa","asa")
         }
     }
 

@@ -1,5 +1,7 @@
 package jp.co.cyberagent.dojo2020.ui.timer
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,6 +17,8 @@ class TimerViewModel : ViewModel(){
     private val mutableTimeCountTextViewLiveData: MutableLiveData<String> = MutableLiveData()
     val timeCountTextViewLiveData: LiveData<String> = mutableTimeCountTextViewLiveData
 
+    var tempCurrentTimeMills: Int = 0
+
     fun getCurrentDate(): String? {
         val df: DateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
         val date = Date(System.currentTimeMillis())
@@ -29,12 +33,24 @@ class TimerViewModel : ViewModel(){
         return getCurrentTimeMills().toString()
     }
 
+    fun setCurrentTimeMills(){
+        tempCurrentTimeMills = getCurrentTimeMills()
+    }
+
+    private fun getElapsedTimeMills(): Int{
+        return getCurrentTimeMills() - tempCurrentTimeMills
+    }
+
+    private fun getStringElapsedTimeMill(): String{
+        return getElapsedTimeMills().toString()
+    }
+
     fun changeToHello() {
         mutableTempTextViewLiveData.value = "Hello"
     }
 
     fun applyMutableTimeCountTextViewLiveData() {
-        mutableTimeCountTextViewLiveData.value = getStringCurrentTimeMills()
+        mutableTimeCountTextViewLiveData.value = getStringElapsedTimeMill()
     }
 
 }
