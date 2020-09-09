@@ -26,10 +26,6 @@ class TimerFragment: Fragment(){
     private var delay: Long = 0
     private var period:kotlin.Long = 0
 
-    private var timeValue = 0                              // 秒カウンター
-
-    private val dataFormat = SimpleDateFormat("mm:ss:SS", Locale.getDefault())
-
     private var tappedStartButtonFlag: Int = 0
 
     private var stopTimerViewFlag: Int = 0
@@ -59,10 +55,6 @@ class TimerFragment: Fragment(){
         val startButton = view.findViewById<ImageButton>(R.id.startButton);
         val stopButton = view.findViewById<ImageButton>(R.id.stopButton);
 
-        val timerText = view.findViewById<TextView>(R.id.timeCountTextView);
-        val tempTextView = view.findViewById<TextView>(R.id.tempTextView);
-
-        timeCountTextView.setText(dataFormat.format(0));
 
         startButton.setOnClickListener{
             if (tappedStartButtonFlag == 0){
