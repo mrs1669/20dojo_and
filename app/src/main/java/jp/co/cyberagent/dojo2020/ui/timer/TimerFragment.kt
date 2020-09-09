@@ -53,7 +53,7 @@ class TimerFragment: Fragment(){
                 if (stopTimerViewFlag == 0){
                     timeValue++                      // 秒カウンタ+1
                     timeToText(timeValue)?.let {        // timeToText()で表示データを作り
-                        timerViewModel.getCurrentDate()          // timeText.textへ代入(表示)
+                        timerViewModel.timeCountTextViewLiveData    // timeText.textへ代入(表示)
                     }
                     handler.postDelayed(this, 1000)  // 1000ｍｓ後に自分にpost
                 }
@@ -66,7 +66,7 @@ class TimerFragment: Fragment(){
         val timerText = view.findViewById<TextView>(R.id.timeCountTextView);
         val tempTextView = view.findViewById<TextView>(R.id.tempTextView);
 
-        timerText.setText(dataFormat.format(0));
+        timeCountTextView.setText(dataFormat.format(0));
 
         startButton.setOnClickListener{
             if (tappedStartButtonFlag == 0){
@@ -74,8 +74,7 @@ class TimerFragment: Fragment(){
                 tappedStartButtonFlag = 1
             }
             timerViewModel.changeToHello()
-            // timerViewModel.applyMutableTimeCountTextViewLiveData()
-            // timerViewModel.getNowDate()
+            timerViewModel.applyMutableTimeCountTextViewLiveData()
         }
 
         stopButton.setOnClickListener {
@@ -97,7 +96,7 @@ class TimerFragment: Fragment(){
         timerViewModel.tempTextViewLiveData.observe(viewLifecycleOwner){
             tempTextView.text = it
         }
-        timerViewModel.tempTimeCountTextViewLiveData.observe(viewLifecycleOwner){
+        timerViewModel.timeCountTextViewLiveData.observe(viewLifecycleOwner){
             timeCountTextView.text = it
         }
     }

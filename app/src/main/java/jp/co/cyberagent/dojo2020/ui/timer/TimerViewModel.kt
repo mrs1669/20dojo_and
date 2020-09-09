@@ -13,7 +13,7 @@ class TimerViewModel : ViewModel(){
     val tempTextViewLiveData: LiveData<String> = mutableTempTextViewLiveData
 
     private val mutableTimeCountTextViewLiveData: MutableLiveData<String> = MutableLiveData()
-    val tempTimeCountTextViewLiveData: LiveData<String> = mutableTimeCountTextViewLiveData
+    val timeCountTextViewLiveData: LiveData<String> = mutableTimeCountTextViewLiveData
 
     fun getCurrentDate(): String? {
         val df: DateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
