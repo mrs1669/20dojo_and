@@ -1,10 +1,10 @@
 package jp.co.cyberagent.dojo2020.ui.timer
 
-class TimerViewModel {
+import android.content.Context
+import androidx.lifecycle.ViewModel
+
+class TimerViewModel (context: Context): ViewModel(){
     var vmtime: Int = 100
 
-    constructor(){
-        this.vmtime
-    }
 
 }
