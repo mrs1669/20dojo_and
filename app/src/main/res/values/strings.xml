@@ -15,6 +15,5 @@
     <string name="timerStopButton">Stop</string>
     <string name="timerStartButtonDescription">スタートボタンです</string>
     <string name="timerStopButtonDescription">ストップボタンです</string>
-    <string name="temptextview">tempTextView</string>
 
 </resources>
