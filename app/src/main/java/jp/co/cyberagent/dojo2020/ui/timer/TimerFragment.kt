@@ -98,17 +98,4 @@ class TimerFragment: Fragment(){
         }
     }
 
-    private fun timeToText(time: Int = 0): String? {
-        return if (time < 0) {
-            null                                    // 時刻が0未満の場合 null
-        } else if (time == 0) {
-            "00:00:00"                            // ０なら
-        } else {
-            val h = time / 3600
-            val m = time % 3600 / 60
-            val s = time % 60
-            "%1$02d:%2$02d:%3$02d".format(h, m, s)  // 表示に整形
-        }
-    }
-
 }
