@@ -41,7 +41,7 @@ class TimerViewModel : ViewModel(){
         return getCurrentTimeMills() - tempCurrentTimeMills
     }
 
-    private fun getStringElapsedTimeMill(): String{
+    private fun getStringElapsedTimeMills(): String{
         return getElapsedTimeMills().toString()
     }
 
@@ -59,12 +59,16 @@ class TimerViewModel : ViewModel(){
         }
     }
 
+    private fun getFormattedElapsedTime(){
+        
+    }
+
     fun changeToHello() {
         mutableTempTextViewLiveData.value = "Hello"
     }
 
     fun applyMutableTimeCountTextViewLiveData() {
-        mutableTimeCountTextViewLiveData.value = getStringElapsedTimeMill()
+        mutableTimeCountTextViewLiveData.value = getStringElapsedTimeMills()
     }
 
 }
