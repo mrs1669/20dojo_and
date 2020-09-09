@@ -61,6 +61,7 @@ class TimerFragment: Fragment(){
         val stopButton = view.findViewById<ImageButton>(R.id.stopButton);
 
         val timerText = view.findViewById<TextView>(R.id.timeCountTextView);
+        val tempTextView = view.findViewById<TextView>(R.id.tempTextView);
 
         timerText.setText(dataFormat.format(0));
 
@@ -69,6 +70,7 @@ class TimerFragment: Fragment(){
                 handler.post(runnable)
                 tappedStartButtonFlag = 1
             }
+            //tempTextView.text
         }
 
         stopButton.setOnClickListener {
