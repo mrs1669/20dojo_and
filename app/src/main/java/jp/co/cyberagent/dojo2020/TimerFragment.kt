@@ -24,7 +24,7 @@ class TimerFragment: Fragment(){
 
     private var timeValue = 0                              // 秒カウンター
 
-    private val dataFormat = SimpleDateFormat("mm:ss.SS", Locale.getDefault())
+    private val dataFormat = SimpleDateFormat("mm:ss:SS", Locale.getDefault())
 
     private var tappedStartButtonFlag: Int = 0
 
