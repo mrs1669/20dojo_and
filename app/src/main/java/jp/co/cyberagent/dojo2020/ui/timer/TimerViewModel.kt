@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class TimerViewModel (context: Context): ViewModel(){
+class TimerViewModel : ViewModel(){
     private var mutableTempTextView: MutableLiveData<String> = MutableLiveData()
     var tempTextView: LiveData<String> = mutableTempTextView
 
