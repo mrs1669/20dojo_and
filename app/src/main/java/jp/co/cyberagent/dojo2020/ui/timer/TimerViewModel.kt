@@ -29,17 +29,12 @@ class TimerViewModel : ViewModel(){
         return getCurrentTimeMills().toString()
     }
 
-    private fun countData(): String{
-        val data:Int = 30
-        return data.toString()
-    }
-
     fun changeToHello() {
         mutableTempTextViewLiveData.value = "Hello"
     }
 
     fun applyMutableTimeCountTextViewLiveData() {
-        mutableTimeCountTextViewLiveData.value = countData()
+        mutableTimeCountTextViewLiveData.value = getStringCurrentTimeMills()
     }
 
 }
