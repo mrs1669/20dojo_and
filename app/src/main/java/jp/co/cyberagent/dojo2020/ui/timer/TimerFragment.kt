@@ -52,7 +52,7 @@ class TimerFragment: Fragment(){
             override fun run() {
                 if (stopTimerViewFlag == 0){
                     timerViewModel.applyMutableTimeCountTextViewLiveData()
-                    handler.postDelayed(this, 1000)  // 1000ｍｓ後に自分にpost
+                    handler.postDelayed(this, 50)  // 50ｍｓ後に自分にpost
                 }
             }
         }
