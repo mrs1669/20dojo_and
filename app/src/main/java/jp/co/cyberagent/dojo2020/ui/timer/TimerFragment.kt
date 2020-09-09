@@ -94,7 +94,7 @@ class TimerFragment: Fragment(){
 
     override fun onStart() {
         super.onStart()
-        timerViewModel.tempTextView.observe(viewLifecycleOwner){
+        timerViewModel.tempTextViewLiveData.observe(viewLifecycleOwner){
             tempTextView.text = it
         }
     }
