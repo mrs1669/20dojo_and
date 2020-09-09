@@ -1,4 +1,4 @@
-package jp.co.cyberagent.dojo2020
+package jp.co.cyberagent.dojo2020.ui.timer
 
 import android.os.Bundle
 import android.os.Handler
@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.core.os.postDelayed
 import androidx.fragment.app.Fragment
+import jp.co.cyberagent.dojo2020.R
 import kotlinx.android.synthetic.main.timer_tab.*
 import java.text.SimpleDateFormat
 import java.util.*

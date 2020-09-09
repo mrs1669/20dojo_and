@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/navi_timer"
-        android:name="jp.co.cyberagent.dojo2020.TimerFragment"
+        android:name="jp.co.cyberagent.dojo2020.ui.timer.TimerFragment"
         android:label="Fragment2"/>
 
     <fragment
