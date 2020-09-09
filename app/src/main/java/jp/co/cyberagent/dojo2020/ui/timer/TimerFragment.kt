@@ -74,7 +74,6 @@ class TimerFragment: Fragment(){
 
         timerViewModel.timeCountTextViewLiveData.observe(viewLifecycleOwner){
             timeCountTextView.text = it
-            Log.i("sa","asa")
         }
     }
 
