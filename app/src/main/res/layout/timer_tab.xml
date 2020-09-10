@@ -38,30 +38,26 @@
         android:layout_height="match_parent"
         android:layout_weight="0.6">
 
-        <ImageButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/startStopButton"
-            android:layout_width="144dp"
-            android:layout_height="144dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="32dp"
-            android:background="@android:drawable/ic_media_play"
-            android:backgroundTint="#00FFFF"
-            android:contentDescription="@string/timerStartButtonDescription"
-            android:scaleType="centerInside"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:src="@android:drawable/ic_media_play"
+            app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/stopButton"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:rippleColor="@color/colorAccent" />
 
         <ImageButton
-            android:id="@+id/stopButton"
+            android:id="@+id/restartButton"
             android:layout_width="144dp"
             android:layout_height="144dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
             android:background="@android:drawable/ic_media_pause"
             android:backgroundTint="#FF80FF"
@@ -69,9 +65,9 @@
             android:scaleType="center"
             android:tint="#FF0000"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/startStopButton"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

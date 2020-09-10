@@ -68,7 +68,7 @@ class TimerFragment: Fragment(){
             }
         }
 
-        stopButton.setOnClickListener {
+        restartButton.setOnClickListener {
             handler.removeCallbacks(runnable)
             if (tappedStartButtonFlag == 1){
                 startStopButton.setBackgroundResource(R.drawable.restart_icon)
