@@ -39,7 +39,7 @@
         android:layout_weight="0.6">
 
         <ImageButton
-            android:id="@+id/startButton"
+            android:id="@+id/startStopButton"
             android:layout_width="144dp"
             android:layout_height="144dp"
             android:layout_marginStart="32dp"
@@ -69,7 +69,7 @@
             android:scaleType="center"
             android:tint="#FF0000"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/startButton"
+            app:layout_constraintEnd_toStartOf="@id/startStopButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

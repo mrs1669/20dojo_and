@@ -1,19 +1,16 @@
 package jp.co.cyberagent.dojo2020.ui.timer
 
 import android.content.Context
-import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.drawToBitmap
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import jp.co.cyberagent.dojo2020.R
-import kotlinx.android.synthetic.main.profile_tab.*
 import kotlinx.android.synthetic.main.timer_tab.*
 
 
@@ -55,7 +52,7 @@ class TimerFragment: Fragment(){
         if(isTimerRunning){
             handler.post(runnable)
         }else{
-            startButton.setOnClickListener{
+            startStopButton.setOnClickListener{
                 if (tappedStartButtonFlag == 0){
                     handler.post(runnable)
                     tappedStartButtonFlag = 1
@@ -74,7 +71,7 @@ class TimerFragment: Fragment(){
         stopButton.setOnClickListener {
             handler.removeCallbacks(runnable)
             if (tappedStartButtonFlag == 1){
-                startButton.setBackgroundResource(R.drawable.restart_icon)
+                startStopButton.setBackgroundResource(R.drawable.restart_icon)
             }
             tappedStartButtonFlag = 0
             if (dataStore != null) {
