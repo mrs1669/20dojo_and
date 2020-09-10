@@ -68,7 +68,7 @@ class TimerViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun applyMutableTimeCountTextViewLiveData() {
-        mutableTimeCountTextViewLiveData.value = getStringElapsedTimeMills()
+        mutableTimeCountTextViewLiveData.value = getFormattedElapsedTime()
     }
 
 }

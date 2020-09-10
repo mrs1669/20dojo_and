@@ -65,6 +65,7 @@ class TimerFragment: Fragment(){
                 if(isTimerRunning){
                     startStopButton.setImageResource(android.R.drawable.ic_media_play)
                     isTimerRunning = false
+                    restartButton.isClickable = true
                     if (dataStore != null) {
                         with(dataStore.edit()) {
                             putBoolean("isTimerRunning", false) // Set SharedPreferences "isTimerRunning"
@@ -76,27 +77,10 @@ class TimerFragment: Fragment(){
                 }else{
                     startStopButton.setImageResource(android.R.drawable.ic_media_pause) // Set button pause image.
                     isTimerRunning = true
+                    restartButton.isClickable = false
                     if (dataStore != null) {
                         with(dataStore.edit()) {
                             putBoolean("isTimerRunning", true) // Set SharedPreferences "isTimerRunning"
-                            apply()
-                        }
-                    }
-                    if(isStartFirst){
-                        timerViewModel.setStartTimeMills() // Set start time only first time.
-                        isStartFirst = false
-                        if (dataStore != null) {
-                            with(dataStore.edit()) {
-                                putBoolean("isStartFirst", false) // Set SharedPreferences "isStarFirst"
-                                apply()
-                            }
-                        }
-                    }else{
-                        // Do nothing.
-                    }
-                    if (dataStore != null) {
-                        with(dataStore.edit()) {
-                            putInt("startTimeMills", timerViewModel.getCurrentTimeMills())
                             apply()
                         }
                     }
@@ -109,6 +93,7 @@ class TimerFragment: Fragment(){
                 if(isTimerRunning){
                     startStopButton.setImageResource(android.R.drawable.ic_media_play)
                     isTimerRunning = false
+                    restartButton.isClickable = true
                     if (dataStore != null) {
                         with(dataStore.edit()) {
                             putBoolean("isTimerRunning", false) // Set SharedPreferences "isTimerRunning"
@@ -120,6 +105,7 @@ class TimerFragment: Fragment(){
                 }else{
                     startStopButton.setImageResource(android.R.drawable.ic_media_pause) // Set button pause image.
                     isTimerRunning = true
+                    restartButton.isClickable = false
                     if (dataStore != null) {
                         with(dataStore.edit()) {
                             putBoolean("isTimerRunning", true) // Set SharedPreferences "isTimerRunning"
@@ -132,17 +118,12 @@ class TimerFragment: Fragment(){
                         if (dataStore != null) {
                             with(dataStore.edit()) {
                                 putBoolean("isStartFirst", false) // Set SharedPreferences "isStarFirst"
+                                putInt("startTimeMills", timerViewModel.getCurrentTimeMills())
                                 apply()
                             }
                         }
                     }else{
                         // Do nothing.
-                    }
-                    if (dataStore != null) {
-                        with(dataStore.edit()) {
-                            putInt("startTimeMills", timerViewModel.getCurrentTimeMills())
-                            apply()
-                        }
                     }
                     handler.post(runnable)
                 }
@@ -150,18 +131,7 @@ class TimerFragment: Fragment(){
         }
 
         restartButton.setOnClickListener {
-            handler.removeCallbacks(runnable)
-            if (tappedStartButtonFlag == 1){
-                startStopButton.setBackgroundResource(R.drawable.restart_icon)
-            }
-            tappedStartButtonFlag = 0
-            if (dataStore != null) {
-                //SharedPreferenceに登録したデータを保存
-                with(dataStore.edit()) {
-                    putBoolean("timerState", false)
-                    apply()
-                }
-            }
+            isStartFirst = true
         }
 
         timerViewModel.timeCountTextViewLiveData.observe(viewLifecycleOwner){
