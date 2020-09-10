@@ -60,7 +60,7 @@ class TimerFragment: Fragment(){
                     handler.post(runnable)
                     tappedStartButtonFlag = 1
                 }
-                timerViewModel.setCurrentTimeMills()
+                timerViewModel.setStartTimeMills()
                 if (dataStore != null) {
                     //SharedPreferenceに登録したデータを保存
                     with(dataStore.edit()) {
