@@ -20,10 +20,6 @@ class TimerFragment: Fragment(){
 
     private val handler = Handler()
 
-    private var tappedStartButtonFlag: Int = 0
-
-    private var stopTimerViewFlag: Int = 0
-
     private var isTimerRunning: Boolean = false
     private var isStartFirst: Boolean = true
     private var startTimeMills: Int = 0
@@ -51,10 +47,8 @@ class TimerFragment: Fragment(){
 
         val runnable = object : Runnable {
             override fun run() {
-                if (stopTimerViewFlag == 0){
-                    timerViewModel.applyMutableTimeCountTextViewLiveData()
-                    handler.postDelayed(this, 36)  // 36ｍｓ後に自分にpost
-                }
+                timerViewModel.applyMutableTimeCountTextViewLiveData()
+                handler.postDelayed(this, 36)  // 36ｍｓ後に自分にpost
             }
         }
 
@@ -144,10 +138,4 @@ class TimerFragment: Fragment(){
             timeCountTextView.text = it
         }
     }
-
-    override fun onStop() {
-        super.onStop()
-        stopTimerViewFlag = 1
-    }
-
 }
