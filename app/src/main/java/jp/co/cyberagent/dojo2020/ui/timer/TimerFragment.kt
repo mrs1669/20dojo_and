@@ -37,7 +37,7 @@ class TimerFragment: Fragment(){
 
         val dataStore: SharedPreferences? = activity?.getPreferences(Context.MODE_PRIVATE)
 
-        isTimerRunning = dataStore?.getBoolean("timerState", false) ?: false
+        isTimerRunning = dataStore?.getBoolean("isTimerRunning", false) ?: false
 
         val runnable = object : Runnable {
             override fun run() {
@@ -55,18 +55,18 @@ class TimerFragment: Fragment(){
         }else{
             startStopButton.setOnClickListener{
                 startStopButton.setImageResource(android.R.drawable.ic_media_pause) // Set button pause image.
+                isTimerRunning = true
+                if (dataStore != null) {
+                    with(dataStore.edit()) {
+                        putBoolean("isTimerRunning", true) // Set SharedPreferences "isTimerRunning"
+                        apply()
+                    }
+                }
                 if (tappedStartButtonFlag == 0){
                     handler.post(runnable)
                     tappedStartButtonFlag = 1
                 }
                 timerViewModel.setStartTimeMills()
-                if (dataStore != null) {
-                    //SharedPreferenceに登録したデータを保存
-                    with(dataStore.edit()) {
-                        putBoolean("timerState", true)
-                        apply()
-                    }
-                }
             }
         }
 
