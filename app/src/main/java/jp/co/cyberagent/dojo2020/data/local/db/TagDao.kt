@@ -6,7 +6,7 @@ import androidx.room.*
 @Dao
 interface TagDao {
     @Query( value = "SELECT * FROM tag_list")
-    fun loadAllTag(): LiveData<List<String>>
+    fun loadAllTag(): LiveData<List<TagEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(tagEntity: TagEntity)

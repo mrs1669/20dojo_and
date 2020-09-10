@@ -30,8 +30,6 @@ class MemoListFragment() : Fragment() {
 
     lateinit var adapter: RecyclerMemoAdapter
 
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = MemoListTabBinding.inflate(layoutInflater)
 
@@ -49,17 +47,17 @@ class MemoListFragment() : Fragment() {
             val adapter = binding.memoRecyclerView.adapter as RecyclerMemoAdapter?
             adapter?.setMemo(it)
         })
-        this.binding = binding
+//        this.binding = binding
+
 
         binding.lifecycleOwner = this.viewLifecycleOwner
 
         binding.floatingActionButton.setOnClickListener {
-            val memo = Memo(0,"",0,0,"")
+            val memo = Memo(0, "","",0,0,"")
             val action = MemoListFragmentDirections.actionNaviMemoListToInputMemoData(memo)
-            view.findNavController().navigate(action)
+//            view.findNavController().navigate(action)
+            findNavController().navigate(action)
         }
-
-
     }
 
     val listener = object : RecyclerMemoAdapter.Listener {
@@ -69,6 +67,7 @@ class MemoListFragment() : Fragment() {
 
         override fun onClickEditButton(memo: Memo) {
             val action = MemoListFragmentDirections.actionNaviMemoListToInputMemoData(memo)
+//            view!!.findNavController().navigate(action)
             view!!.findNavController().navigate(action)
         }
     }

@@ -4,7 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 
 // 直接SQLliteと直接やり取りするポイント
-@Database(entities=[MemoEntity::class],version = 1,exportSchema = false)
+@Database(entities=[MemoEntity::class, TagEntity::class],version = 1,exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun memoDao(): MemoDao
     abstract fun tagDao(): TagDao

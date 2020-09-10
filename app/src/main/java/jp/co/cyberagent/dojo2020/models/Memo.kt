@@ -6,6 +6,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Memo (
     val id: Int,
+    val tag: String,
     val title: String,
     val hour: Int,
     val minute: Int,

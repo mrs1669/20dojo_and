@@ -8,15 +8,17 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "memo_list")
 data class MemoEntity(
     @PrimaryKey(autoGenerate = true) val id : Int,
+    @ColumnInfo(name = "tag") val tag : String,
     @ColumnInfo(name = "title") val title: String,
     @ColumnInfo(name = "hour") val hour: Int,
     @ColumnInfo(name = "minute") val minute: Int,
     @ColumnInfo(name = "description") val description: String
 ) {
     companion object {
-        fun createForInsert(id: Int = 0, title: String, hour: Int, minute: Int, description: String): MemoEntity {
+        fun createForInsert(id: Int = 0, tag: String, title: String, hour: Int, minute: Int, description: String): MemoEntity {
             return MemoEntity(
                 id,
+                tag,
                 title,
                 hour,
                 minute,

@@ -37,7 +37,7 @@ class RecyclerMemoAdapter(
 
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
         val memo = memoList[position]
-        holder.binding.viewModel = Memo(memo.id,memo.title,memo.hour,memo.minute,memo.description)
+        holder.binding.viewModel = Memo(memo.id,memo.tag,memo.title,memo.hour,memo.minute,memo.description)
 
         holder.itemView.btDeleteMemo.setOnClickListener{
             listener.onClickItem(memo)
