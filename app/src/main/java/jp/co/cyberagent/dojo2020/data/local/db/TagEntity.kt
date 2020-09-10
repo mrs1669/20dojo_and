@@ -7,13 +7,14 @@ import androidx.room.PrimaryKey
 //DBのテーブル
 @Entity(tableName = "tag_list")
 data class TagEntity(
-    @PrimaryKey(autoGenerate = true) val id : Int,
-    @ColumnInfo(name = "tag") val tag: String
+//    @PrimaryKey(autoGenerate = true) val id : Int,
+////    @ColumnInfo(name = "tag") val tag: String
+    @PrimaryKey
+    val tag: String
 ) {
     companion object {
-        fun createForInsert(id: Int = 0, tag: String): TagEntity {
+        fun createForInsert(tag: String): TagEntity {
             return TagEntity(
-                id,
                 tag
             )
         }

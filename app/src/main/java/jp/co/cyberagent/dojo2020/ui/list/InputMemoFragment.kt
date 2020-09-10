@@ -59,7 +59,7 @@ class InputMemoFragment : Fragment() {
             val minute = binding.etInputMemoMinute.text.toString().toInt()
             val description = binding.etDescription.text.toString()
             val tag = binding.spInputMemoTag.selectedItem.toString()
-            Log.i("tag in inputFragment", tag)
+            Log.d("tag in inputFragment", tag)
 
             if (title == null || (hour == 0 && minute == 0) || description == null || minute > 59 || tag == "タグが登録されていません" || tag == null) {
                 Toast.makeText(context, "入力情報が不適切です", Toast.LENGTH_LONG).show()
@@ -72,7 +72,7 @@ class InputMemoFragment : Fragment() {
                 }
                 memoListViewModel.editMemo.value = Memo(0 ,"","", 0,0,"")
                 findNavController().navigate(R.id.action_input_memo_data_to_navi_memo_list)
-            }
+        }
         }
 
 //        var adapter: ArrayAdapter<LiveData<List<String>>> = ArrayAdapter<>(
@@ -85,7 +85,12 @@ class InputMemoFragment : Fragment() {
 
         binding.btTagAdd.setOnClickListener{
             val tagName = binding.etTagAdd.text.toString()
-            memoListViewModel.saveTag(Tag(0, tagName))
+            if (tagName == null || tagName == "" ) {
+                Toast.makeText(context, "入力情報が不適切です", Toast.LENGTH_LONG).show()
+            } else {
+                memoListViewModel.saveTag(Tag(tagName))
+                binding.etTagAdd.setText("")
+            }
         }
 
 

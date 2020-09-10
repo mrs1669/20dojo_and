@@ -13,12 +13,13 @@
             android:id="@+id/action_navi_memo_list_to_input_memo_data"
             app:destination="@id/input_memo_data"
             app:popUpTo="@id/navi_memo_list"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"
+            />
     </fragment>
 
     <fragment
         android:id="@+id/data_graph"
-        android:name="jp.co.cyberagent.dojo2020.TimerFragment"
+        android:name="jp.co.cyberagent.dojo2020.ui.graph.GraphFragment"
         android:label="Fragment5"/>
 
     <fragment

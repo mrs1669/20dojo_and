@@ -45,12 +45,12 @@ class LocalDataSource (private val database: AppDatabase): MemoDataSource, TagDa
     override fun loadAllTag(): LiveData<List<Tag>> {
         return database.tagDao().loadAllTag().map {
                 tag ->
-            tag.map { Tag(it.id, it.tag)}
+            tag.map { Tag(it.tag)}
         }
     }
 
     override fun inputTag(tag: Tag) {
-        val forInsertTag = TagEntity.createForInsert(tag.id,  tag.tag)
+        val forInsertTag = TagEntity.createForInsert(tag.tag)
         database.tagDao().insert(forInsertTag)
     }
 }

@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.lifecycle.*
 import jp.co.cyberagent.dojo2020.DI
 import jp.co.cyberagent.dojo2020.data.Repository
+import jp.co.cyberagent.dojo2020.models.GraphArraay
+import jp.co.cyberagent.dojo2020.models.GraphData
 import jp.co.cyberagent.dojo2020.models.Memo
 import jp.co.cyberagent.dojo2020.models.Tag
 import kotlinx.coroutines.Dispatchers
@@ -14,11 +16,41 @@ class GraphViewModel(context: Context): ViewModel() {
     private val memoRepository: Repository
     val memoMutableList : LiveData<List<Memo>>
     val tagMutableList: LiveData<List<String>>
-    val editMemo : MutableLiveData<Memo> by lazy {
-        MutableLiveData<Memo>()
-    }
+    var graphDataArray: GraphArraay
     var selectedtag : String
+    fun getGraphValue(tag: String, memoArray: LiveData<List<Memo>> ) : Int{
+        var sum = 0
+        viewModelScope.launch (Dispatchers.IO){
 
+            Log.i("getGraphValue:sum", sum.toString())
+            memoArray.map {
+                it.forEach{
+                    if (it.tag == tag){
+                        sum += it.hour * 60 + it.minute
+                    }
+                    viewModelScope.launch (Dispatchers.IO) {
+                        Log.i("getGraphValue tag", it.tag)
+                        Log.i("getGraphValue", sum.toString())
+                    }
+
+                }
+
+            }
+        }
+
+        return sum
+    }
+    fun getArrayGraphData (memoMutableList : LiveData<List<Memo>>, tagMutableList: LiveData<List<String>>): GraphArraay{
+        var graphDataArray = GraphArraay(mutableListOf<GraphData>())
+        tagMutableList.value?.forEach{
+            graphDataArray.graphDataArray.add(GraphData(it,getGraphValue(it, memoMutableList)))
+        }
+        viewModelScope.launch (Dispatchers.IO) {
+            Log.i("getArrayGraphData", graphDataArray.graphDataArray.toString())
+        }
+
+        return graphDataArray
+    }
     init {
         memoRepository = DI.injectRepository(context)
         memoMutableList = memoRepository.loadAllMemo()
@@ -28,12 +60,9 @@ class GraphViewModel(context: Context): ViewModel() {
             }
         }
         selectedtag = tagMutableList.value?.get(0) ?: "タグが登録されていません"
+        graphDataArray = getArrayGraphData(memoMutableList, tagMutableList)
     }
 
-    fun saveMemo(memo: Memo) = viewModelScope.launch(Dispatchers.IO) {
-        memoRepository.inputMemo(memo)
-        Log.i("test: in ViewModel ", memo.title )
-    }
 
     fun loadAllMemo() {
         viewModelScope.launch {
@@ -41,10 +70,6 @@ class GraphViewModel(context: Context): ViewModel() {
         }
     }
 
-    fun saveTag(tag: Tag) = viewModelScope.launch(Dispatchers.IO) {
-        memoRepository.inputTag(tag)
-        Log.i("test: in ViewModel ", tag.tag )
-    }
 
     fun loadAllTag() {
         viewModelScope.launch {
@@ -54,13 +79,5 @@ class GraphViewModel(context: Context): ViewModel() {
                 }
             }
         }
-    }
-
-    fun deleteMemo(memo: Memo) = viewModelScope.launch(Dispatchers.IO) {
-        memoRepository.deleteMemo(memo)
-    }
-
-    fun updateMemo(memo: Memo) = viewModelScope.launch(Dispatchers.IO) {
-        memoRepository.updateMemo(memo)
     }
 }
