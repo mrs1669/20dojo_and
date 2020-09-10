@@ -1,25 +1,25 @@
 package jp.co.cyberagent.dojo2020.ui.timer
 
+import android.content.Context
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.TextView
+import androidx.core.view.drawToBitmap
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import jp.co.cyberagent.dojo2020.R
-import jp.co.cyberagent.dojo2020.ui.list.MemoListViewModel
+import kotlinx.android.synthetic.main.profile_tab.*
 import kotlinx.android.synthetic.main.timer_tab.*
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class TimerFragment: Fragment(){
 
+    private val timerViewModel: TimerViewModel by viewModels()
 
     private val handler = Handler()
 
@@ -30,11 +30,10 @@ class TimerFragment: Fragment(){
 
     private var stopTimerViewFlag: Int = 0
 
-    private val timerViewModel: TimerViewModel by viewModels()
-
     private var isTimerRunning: Boolean = false
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.timer_tab, container, false)
     }
@@ -42,8 +41,14 @@ class TimerFragment: Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val dataStore: SharedPreferences? = activity?.getPreferences(Context.MODE_PRIVATE)
+
         delay = 0;
         period = 100;
+
+        isTimerRunning = dataStore?.getBoolean("timerState", false) ?: false
+
+        println(isTimerRunning)
 
         val runnable = object : Runnable {
             override fun run() {
@@ -62,9 +67,15 @@ class TimerFragment: Fragment(){
                 if (tappedStartButtonFlag == 0){
                     handler.post(runnable)
                     tappedStartButtonFlag = 1
-                    isTimerRunning = true
                 }
                 timerViewModel.setCurrentTimeMills()
+                if (dataStore != null) {
+                    //SharedPreferenceに登録したデータを保存
+                    with(dataStore.edit()) {
+                        putBoolean("timerState", true)
+                        apply()
+                    }
+                }
             }
         }
 
