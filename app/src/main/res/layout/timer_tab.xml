@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="#DCFFD6"
     android:orientation="vertical">
 
 
@@ -24,7 +24,7 @@
             android:fontFamily="sans-serif-thin"
             android:text="@string/timerCountTextView"
             android:textAlignment="center"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/colorAccent"
             android:textSize="54sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
