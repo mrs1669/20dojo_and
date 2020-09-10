@@ -1,18 +1,15 @@
 package jp.co.cyberagent.dojo2020.ui
 
-import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import jp.co.cyberagent.dojo2020.R
 import jp.co.cyberagent.dojo2020.databinding.RecyclerviewMemoItemBinding
 import jp.co.cyberagent.dojo2020.models.Memo
-import jp.co.cyberagent.dojo2020.ui.list.MemoListViewModel
-import jp.co.cyberagent.dojo2020.ui.list.MemoListViewModelFactory
 import kotlinx.android.synthetic.main.recyclerview_memo_item.view.*
 
 class RecyclerMemoAdapter(
@@ -21,6 +18,8 @@ class RecyclerMemoAdapter(
 ) : RecyclerView.Adapter<RecyclerMemoAdapter.RecyclerViewHolder>() {
 
     var memoList: List<Memo> = initList
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -37,15 +36,20 @@ class RecyclerMemoAdapter(
 
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
         val memo = memoList[position]
+        val dialog: DialogViewFragment = DialogViewFragment(memo, listener)
         holder.binding.viewModel = Memo(memo.id,memo.title,memo.hour,memo.minute,memo.description)
 
-        holder.itemView.btDeleteMemo.setOnClickListener{
-            listener.onClickItem(memo)
+        holder.itemView.ll_card_all.setOnClickListener{
+            listener.getFragmentManager()?.let { manager -> dialog.show(manager, "sample") }
         }
 
-        holder.itemView.btEditMemo.setOnClickListener{
-            listener.onClickEditButton(memo)
-        }
+//        holder.itemView.btDeleteMemo.setOnClickListener{
+//            listener.onClickItem(memo)
+//        }
+//
+//        holder.itemView.btEditMemo.setOnClickListener{
+//            listener.onClickEditButton(memo)
+//        }
     }
 
     fun setMemo(memo: List<Memo>) {
@@ -67,5 +71,6 @@ class RecyclerMemoAdapter(
     interface  Listener {
         fun onClickItem(memo:Memo)
         fun onClickEditButton(memo: Memo)
+        fun getFragmentManager(): FragmentManager?
     }
 }
