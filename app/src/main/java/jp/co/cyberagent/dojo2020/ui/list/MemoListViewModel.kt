@@ -6,20 +6,28 @@ import androidx.lifecycle.*
 import jp.co.cyberagent.dojo2020.DI
 import jp.co.cyberagent.dojo2020.data.Repository
 import jp.co.cyberagent.dojo2020.models.Memo
+import jp.co.cyberagent.dojo2020.models.Tag
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MemoListViewModel(context: Context): ViewModel() {
     private val memoRepository: Repository
     val memoMutableList : LiveData<List<Memo>>
+    val tagMutableList: LiveData<List<String>>
     val editMemo : MutableLiveData<Memo> by lazy {
         MutableLiveData<Memo>()
     }
-
+    var selectedtag : String
 
     init {
         memoRepository = DI.injectRepository(context)
         memoMutableList = memoRepository.loadAllMemo()
+        tagMutableList = memoRepository.loadAllTag().map {
+            it.map {
+                it.tag
+            }
+        }
+        selectedtag = tagMutableList.value?.get(0) ?: "タグが登録されていません"
     }
 
     fun saveMemo(memo: Memo) = viewModelScope.launch(Dispatchers.IO) {
@@ -30,6 +38,21 @@ class MemoListViewModel(context: Context): ViewModel() {
     fun loadAllMemo() {
         viewModelScope.launch {
             val memoData = memoRepository.loadAllMemo()
+        }
+    }
+
+    fun saveTag(tag: Tag) = viewModelScope.launch(Dispatchers.IO) {
+        memoRepository.inputTag(tag)
+        Log.i("test: in ViewModel ", tag.tag )
+    }
+
+    fun loadAllTag() {
+        viewModelScope.launch {
+            memoRepository.loadAllTag().map {
+                it.map {
+                    it.tag
+                }
+            }
         }
     }
 

@@ -17,7 +17,7 @@ object DI {
         return DefaultRepository(localDataSource)
     }
 
-    private fun injectLocalDataSource(context: Context): MemoDataSource {
+    private fun injectLocalDataSource(context: Context): LocalDataSource {
         val database = injectDatabase(context)
 
         return LocalDataSource(database)
@@ -27,7 +27,7 @@ object DI {
         val database = Room.databaseBuilder(
             context,
             AppDatabase::class.java,
-            "memo_database"
+            "app_database"
         ).build()
 
         return database

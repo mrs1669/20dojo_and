@@ -14,53 +14,197 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-                <EditText
-                    android:id="@+id/etInputMemoTitle"
+                <LinearLayout
+                    android:id="@+id/llInputMemoTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{viewModel.editMemo.title}"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <EditText
-                    android:id="@+id/etInputMemoHour"
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="タイトル"
+                            android:textSize="24dp" />
+
+                        <EditText
+                            android:id="@+id/etInputMemoTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewModel.editMemo.title}" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/llInputMemoHour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:inputType="number"
-                    android:text="@{Integer.toString(viewModel.editMemo.hour)}"
-                    app:layout_constraintTop_toBottomOf="@+id/etInputMemoTitle"
-                    tools:layout_editor_absoluteX="0dp" />
+                    app:layout_constraintTop_toBottomOf="@+id/llInputMemoTitle">
 
-                <EditText
-                    android:id="@+id/etInputMemoMinute"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="時間(hour)"
+                            android:textSize="24dp" />
+
+                        <EditText
+                            android:id="@+id/etInputMemoHour"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:inputType="number"
+                            android:text="@{Integer.toString(viewModel.editMemo.hour)}"
+                            app:layout_constraintTop_toBottomOf="@+id/etInputMemoTitle"
+                            tools:layout_editor_absoluteX="0dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llInputMemoMinute"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:inputType="number"
-                    android:text="@{Integer.toString(viewModel.editMemo.minute)}"
-                    app:layout_constraintTop_toBottomOf="@+id/etInputMemoHour"
-                    tools:layout_editor_absoluteX="0dp" />
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/llInputMemoHour">
 
-                <EditText
-                    android:id="@+id/etDescription"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="時間(minute)"
+                            android:textSize="24dp" />
+
+                        <EditText
+                            android:id="@+id/etInputMemoMinute"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:inputType="number"
+                            android:text="@{Integer.toString(viewModel.editMemo.minute)}"
+                            tools:layout_editor_absoluteX="0dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llInputMemoDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:inputType="text"
-                    android:text="@{viewModel.editMemo.description}"
-                    app:layout_constraintTop_toBottomOf="@+id/etInputMemoMinute"
-                    tools:layout_editor_absoluteX="0dp" />
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/llInputMemoMinute">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="説明"
+                            android:textSize="24dp" />
+
+                        <EditText
+                            android:id="@+id/etDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:inputType="text"
+                            android:text="@{viewModel.editMemo.description}" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llInputMemoUrl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/llInputMemoDescription">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="参考URL"
+                            android:textSize="24dp" />
+
+                        <EditText
+                            android:id="@+id/etUrl"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:inputType="text"
+                            android:text="@{viewModel.editMemo.description}" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llInputMemoTagSpiner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/llInputMemoUrl">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="タグ選択"
+                            android:textSize="24dp" />
+
+                        <Spinner
+                            android:id="@+id/spInputMemoTag"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:entries="@{viewModel.tagMutableList}"
+                            android:minWidth="120dp"
+                            android:orientation="vertical" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llInputMemoTag"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/llInputMemoTagSpiner"
+                    tools:layout_editor_absoluteX="-16dp">
+
+                        <EditText
+                            android:id="@+id/etTagAdd"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:text="@{viewModel.editMemo.tag}"
+                            app:layout_constraintTop_toBottomOf="@+id/llInputMemoTag"
+                            tools:layout_editor_absoluteX="0dp"
+                            android:layout_weight="1"/>
+
+                        <Button
+                            android:id="@+id/btTagAdd"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:text="タグを追加する" />
+                </LinearLayout>
+
 
                 <Button
                     android:id="@+id/btInputMemoSubmit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="28dp"
                     android:text="追加"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/etDescription" />
+                    app:layout_constraintTop_toBottomOf="@+id/llInputMemoTag" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btBuckToList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="32dp"
+                    android:clickable="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:srcCompat="@android:drawable/ic_menu_revert" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
