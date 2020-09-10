@@ -17,6 +17,11 @@
     </fragment>
 
     <fragment
+        android:id="@+id/data_graph"
+        android:name="jp.co.cyberagent.dojo2020.TimerFragment"
+        android:label="Fragment5"/>
+
+    <fragment
         android:id="@+id/navi_timer"
         android:name="jp.co.cyberagent.dojo2020.TimerFragment"
         android:label="Fragment2"/>

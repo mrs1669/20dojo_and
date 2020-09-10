@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">メモ (CA Tech Dojo)</string>
     <!-- TODO: Remove or change this placeholder text -->
-    
+
     <string name="timer_fragment">TimerFragmentを表示</string>
     <string name="input_memo_fragment">InputMemoFragment を表示</string>
 
@@ -15,5 +15,7 @@
     <string name="timerStopButton">Stop</string>
     <string name="timerStartButtonDescription">スタートボタンです</string>
     <string name="timerStopButtonDescription">ストップボタンです</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
