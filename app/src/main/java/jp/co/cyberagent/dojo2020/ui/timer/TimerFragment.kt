@@ -132,6 +132,7 @@ class TimerFragment: Fragment(){
                     apply()
                 }
             }
+            timeCountTextView.text = "00:00:00:000"
         }
 
         timerViewModel.timeCountTextViewLiveData.observe(viewLifecycleOwner){
