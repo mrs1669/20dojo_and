@@ -58,6 +58,10 @@ class TimerViewModel : ViewModel(){
         return timeToTimeString(getElapsedTimeMills()) ?: "ElapsedTime cannot refer." // try to use Elvis operator.
     }
 
+    private fun getFormattedCurrentTime(): String{
+        
+    }
+
     fun applyMutableTimeCountTextViewLiveData() {
         mutableTimeCountTextViewLiveData.value = getFormattedElapsedTime()
     }
