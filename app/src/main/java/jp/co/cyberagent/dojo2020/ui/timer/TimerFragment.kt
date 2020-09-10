@@ -132,6 +132,12 @@ class TimerFragment: Fragment(){
 
         restartButton.setOnClickListener {
             isStartFirst = true
+            if (dataStore != null) {
+                with(dataStore.edit()) {
+                    putBoolean("isStartFirst", false) // Set SharedPreferences "isStarFirst"
+                    apply()
+                }
+            }
         }
 
         timerViewModel.timeCountTextViewLiveData.observe(viewLifecycleOwner){
