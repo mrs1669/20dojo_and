@@ -94,14 +94,10 @@ class InputMemoFragment : Fragment() {
             }
         }
 
+        binding.btBuckToList.setOnClickListener{
+            findNavController().navigate(R.id.action_input_memo_data_to_navi_memo_list)
+        }
+
 
     }
-}
-
-private fun Spinner.setOnItemClickListener() {
-    onItemSelectedListener
-}
-
-private operator fun AdapterView.OnItemSelectedListener?.invoke(onItemClickListener: AdapterView.OnItemClickListener) {
-
 }
