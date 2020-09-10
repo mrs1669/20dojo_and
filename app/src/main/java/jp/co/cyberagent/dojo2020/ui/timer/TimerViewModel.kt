@@ -20,7 +20,7 @@ class TimerViewModel(application: Application) : AndroidViewModel(application) {
         return df.format(date)
     }
 
-    private fun getCurrentTimeMills(): Int{
+    fun getCurrentTimeMills(): Int{
         return System.currentTimeMillis().toInt()
     }
 

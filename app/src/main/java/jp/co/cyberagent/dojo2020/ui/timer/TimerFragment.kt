@@ -26,6 +26,7 @@ class TimerFragment: Fragment(){
 
     private var isTimerRunning: Boolean = false
     private var isStartFirst: Boolean = true
+    private var startTimeMills: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -40,6 +41,13 @@ class TimerFragment: Fragment(){
 
         isTimerRunning = dataStore?.getBoolean("isTimerRunning", false) ?: false
         isStartFirst = dataStore?.getBoolean("isStartFirst", true) ?: true
+        startTimeMills = dataStore?.getInt("startTimeMills", 0) ?: 0
+
+        if(startTimeMills != 0){
+            timerViewModel.startTimeMills = this.startTimeMills
+        }
+
+        println(isTimerRunning)
 
         val runnable = object : Runnable {
             override fun run() {
@@ -53,6 +61,48 @@ class TimerFragment: Fragment(){
 
         if(isTimerRunning){
             startStopButton.setImageResource(android.R.drawable.ic_media_pause) // Set button pause image.
+            startStopButton.setOnClickListener{
+                if(isTimerRunning){
+                    startStopButton.setImageResource(android.R.drawable.ic_media_play)
+                    isTimerRunning = false
+                    if (dataStore != null) {
+                        with(dataStore.edit()) {
+                            putBoolean("isTimerRunning", false) // Set SharedPreferences "isTimerRunning"
+                            apply()
+                        }
+                    }
+                    timerViewModel.setPauseTimeMills()
+                    handler.removeCallbacks(runnable)
+                }else{
+                    startStopButton.setImageResource(android.R.drawable.ic_media_pause) // Set button pause image.
+                    isTimerRunning = true
+                    if (dataStore != null) {
+                        with(dataStore.edit()) {
+                            putBoolean("isTimerRunning", true) // Set SharedPreferences "isTimerRunning"
+                            apply()
+                        }
+                    }
+                    if(isStartFirst){
+                        timerViewModel.setStartTimeMills() // Set start time only first time.
+                        isStartFirst = false
+                        if (dataStore != null) {
+                            with(dataStore.edit()) {
+                                putBoolean("isStartFirst", false) // Set SharedPreferences "isStarFirst"
+                                apply()
+                            }
+                        }
+                    }else{
+                        // Do nothing.
+                    }
+                    if (dataStore != null) {
+                        with(dataStore.edit()) {
+                            putInt("startTimeMills", timerViewModel.getCurrentTimeMills())
+                            apply()
+                        }
+                    }
+                    handler.post(runnable)
+                }
+            }
             handler.post(runnable)
         }else{
             startStopButton.setOnClickListener{
@@ -87,6 +137,12 @@ class TimerFragment: Fragment(){
                         }
                     }else{
                         // Do nothing.
+                    }
+                    if (dataStore != null) {
+                        with(dataStore.edit()) {
+                            putInt("startTimeMills", timerViewModel.getCurrentTimeMills())
+                            apply()
+                        }
                     }
                     handler.post(runnable)
                 }
