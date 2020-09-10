@@ -23,9 +23,6 @@ class TimerFragment: Fragment(){
 
     private val handler = Handler()
 
-    private var delay: Long = 0
-    private var period:kotlin.Long = 0
-
     private var tappedStartButtonFlag: Int = 0
 
     private var stopTimerViewFlag: Int = 0
@@ -43,12 +40,7 @@ class TimerFragment: Fragment(){
 
         val dataStore: SharedPreferences? = activity?.getPreferences(Context.MODE_PRIVATE)
 
-        delay = 0;
-        period = 100;
-
         isTimerRunning = dataStore?.getBoolean("timerState", false) ?: false
-
-        println(isTimerRunning)
 
         val runnable = object : Runnable {
             override fun run() {
