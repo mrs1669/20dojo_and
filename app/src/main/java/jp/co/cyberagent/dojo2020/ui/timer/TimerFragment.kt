@@ -77,6 +77,13 @@ class TimerFragment: Fragment(){
                 startButton.setBackgroundResource(R.drawable.restart_icon)
             }
             tappedStartButtonFlag = 0
+            if (dataStore != null) {
+                //SharedPreferenceに登録したデータを保存
+                with(dataStore.edit()) {
+                    putBoolean("timerState", false)
+                    apply()
+                }
+            }
         }
 
         timerViewModel.timeCountTextViewLiveData.observe(viewLifecycleOwner){

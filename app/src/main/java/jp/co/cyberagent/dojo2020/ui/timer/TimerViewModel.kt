@@ -40,7 +40,7 @@ class TimerViewModel : ViewModel(){
         return getElapsedTimeMills().toString()
     }
 
-    private fun timeToText(time: Int = 0): String? {
+    private fun timeToTimeString(time: Int = 0): String? {
         return if (time < 0) {
             null                                    // 時刻が0未満の場合 null
         } else if (time == 0) {
@@ -55,7 +55,7 @@ class TimerViewModel : ViewModel(){
     }
 
     private fun getFormattedElapsedTime(): String{
-        return timeToText(getElapsedTimeMills()) ?: "ElapsedTime cannot refer." // try to use Elvis operator.
+        return timeToTimeString(getElapsedTimeMills()) ?: "ElapsedTime cannot refer." // try to use Elvis operator.
     }
 
     fun applyMutableTimeCountTextViewLiveData() {
