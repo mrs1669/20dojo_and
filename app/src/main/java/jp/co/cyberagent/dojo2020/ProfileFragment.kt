@@ -80,6 +80,9 @@ class ProfileFragment : Fragment() {
                 edit_github_account.visibility = View.VISIBLE
                 edit_twitter_account.visibility = View.VISIBLE
 
+                edit_image.alpha = 0.6F
+                photo_image.visibility = View.VISIBLE
+
                 edit_name.setText(person_name.text, TextView.BufferType.NORMAL)
                 edit_github_account.setText(github_account.text, TextView.BufferType.NORMAL)
                 edit_twitter_account.setText(twitter_account.text, TextView.BufferType.NORMAL)
@@ -90,6 +93,9 @@ class ProfileFragment : Fragment() {
                 //もう一度編集ボタンを押すとTextViewに戻る
 
                 edit_image.isEnabled = false
+
+                edit_image.alpha = 1F
+                photo_image.visibility = View.INVISIBLE
 
                 //編集ボタンが押された時に前の内容が消えないようにする
                 if (edit_name.text.toString() != "" && edit_github_account.text.toString() != "" && edit_twitter_account.text.toString() != "") {
