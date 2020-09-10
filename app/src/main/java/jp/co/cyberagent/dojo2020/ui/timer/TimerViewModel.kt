@@ -12,7 +12,7 @@ class TimerViewModel(application: Application) : AndroidViewModel(application) {
     val timeCountTextViewLiveData: LiveData<String> =  mutableTimeCountTextViewLiveData
 
     var startTimeMills: Int = 0
-    var pauseTimeMills: Int = 0
+    var pauseTimeStartMills: Int = 0
 
     fun getCurrentDate(): String? {
         val df: DateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
@@ -32,8 +32,8 @@ class TimerViewModel(application: Application) : AndroidViewModel(application) {
         startTimeMills = getCurrentTimeMills()
     }
 
-    fun setPauseTimeMills(){
-        pauseTimeMills = getCurrentTimeMills()
+    fun setPauseTimeStartMills(){
+        pauseTimeStartMills = getCurrentTimeMills()
     }
 
     private fun getElapsedTimeMills(): Int{
@@ -58,13 +58,24 @@ class TimerViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-
     private fun getFormattedElapsedTime(): String{
         return timeToTimeString(getElapsedTimeMills()) ?: "ElapsedTime cannot refer." // try to use Elvis operator.
     }
 
     private fun getFormattedCurrentTime(): String{
         return ""
+    }
+
+    private fun getPauseTimeMills(): Int{
+        return getCurrentTimeMills() - pauseTimeStartMills
+    }
+
+    private fun getTimeMills(): Int{
+        return getElapsedTimeMills() - getPauseTimeMills()
+    }
+
+    private fun getFormattedTime(): String{
+        return timeToTimeString(getTimeMills()) ?: "Time cannot refer."
     }
 
     fun applyMutableTimeCountTextViewLiveData() {

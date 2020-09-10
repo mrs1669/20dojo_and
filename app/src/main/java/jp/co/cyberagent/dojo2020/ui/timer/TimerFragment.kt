@@ -43,8 +43,6 @@ class TimerFragment: Fragment(){
             timerViewModel.startTimeMills = this.startTimeMills
         }
 
-        println(isTimerRunning)
-
         val runnable = object : Runnable {
             override fun run() {
                 timerViewModel.applyMutableTimeCountTextViewLiveData()
@@ -66,7 +64,7 @@ class TimerFragment: Fragment(){
                             apply()
                         }
                     }
-                    timerViewModel.setPauseTimeMills()
+                    timerViewModel.setPauseTimeStartMills()
                     handler.removeCallbacks(runnable)
                 }else{
                     startStopButton.setImageResource(android.R.drawable.ic_media_pause) // Set button pause image.
@@ -88,13 +86,14 @@ class TimerFragment: Fragment(){
                     startStopButton.setImageResource(android.R.drawable.ic_media_play)
                     isTimerRunning = false
                     restartButton.isClickable = true
+                    println(timerViewModel.pauseTimeStartMills)
                     if (dataStore != null) {
                         with(dataStore.edit()) {
                             putBoolean("isTimerRunning", false) // Set SharedPreferences "isTimerRunning"
+                            putInt("pauseTimeStartMills", timerViewModel.getCurrentTimeMills())
                             apply()
                         }
                     }
-                    timerViewModel.setPauseTimeMills()
                     handler.removeCallbacks(runnable)
                 }else{
                     startStopButton.setImageResource(android.R.drawable.ic_media_pause) // Set button pause image.
@@ -117,7 +116,7 @@ class TimerFragment: Fragment(){
                             }
                         }
                     }else{
-                        // Do nothing.
+
                     }
                     handler.post(runnable)
                 }
