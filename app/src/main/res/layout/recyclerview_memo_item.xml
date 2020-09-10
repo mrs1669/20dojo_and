@@ -14,18 +14,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        app:cardElevation="10dp">
+        app:cardElevation="10dp"
+        app:cardCornerRadius="10dp">
 
         <LinearLayout
             android:id="@+id/ll_card_all"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="35dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="タイトル"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:text="時間"
+                    android:textSize="15sp"
+                    />
+            </LinearLayout>
             <LinearLayout
                 android:id="@+id/ll_card_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="60dp"
                 android:layout_margin="10dp"
                 android:background="@android:color/white"
                 android:orientation="horizontal">
@@ -33,11 +56,9 @@
                 <TextView
                     android:id="@+id/memoHead"
                     android:layout_width="wrap_content"
-
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
                     android:text="@{viewModel.title}"
-                    android:layout_gravity="center"
                     android:textSize="30sp" />
 
                 <TextView
@@ -45,41 +66,54 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="right"
+                    android:textSize="30sp"
                     android:text="@{Integer.toString(viewModel.hour) + `:` + Integer.toString(viewModel.minute)}"
                     />
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/memoDescription"
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@{viewModel.description}"
-                />
+                android:layout_height="1dp"
+                android:background="@color/colorPrimary"/>
 
             <LinearLayout
-                android:id="@+id/llBts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center"
-                >
-                <Button
-                    android:id="@+id/btDeleteMemo"
+                android:layout_margin="10dp">
+
+                <TextView
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="内容："
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/memoDescription"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:text="削除"
-                    />
-                <Button
-                    android:id="@+id/btEditMemo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:text="編集"
+                    android:gravity="left"
+                    android:text="@{viewModel.description}"
+                    android:textSize="15sp"
                     />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/memoTag"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@{viewModel.tag}"
+                />
+
+            <TextView
+                android:id="@+id/memoUrl"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@{viewModel.url}"
+                />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </layout>

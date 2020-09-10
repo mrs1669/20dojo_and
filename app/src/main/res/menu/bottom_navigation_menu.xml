@@ -3,8 +3,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navi_memo_list"
-        android:icon="@drawable/ic_baseline_edit_24"
+        android:icon="@drawable/ic_baseline_library_books_24"
         android:title="メモ一覧"/>
+    <item
+        android:id="@+id/data_graph"
+        android:icon="@drawable/ic_baseline_bar_chart_24"
+        android:title="グラフ"/>
     <item
         android:id="@+id/navi_timer"
         android:icon="@drawable/ic_baseline_alarm_24"
