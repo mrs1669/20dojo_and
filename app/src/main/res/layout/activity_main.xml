@@ -26,8 +26,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="?android:attr/windowBackground"
-        app:itemIconTint="#ff1493"
-        app:itemTextColor="#ff1493"
+        app:itemBackground="@color/tabColor"
+        app:itemIconTint="@color/tabAccent"
+        app:itemTextColor="@color/tabAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_navigation_menu" />
 
