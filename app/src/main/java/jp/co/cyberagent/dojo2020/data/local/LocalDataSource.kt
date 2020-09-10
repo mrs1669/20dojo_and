@@ -17,26 +17,26 @@ class LocalDataSource (private val database: AppDatabase): MemoDataSource, TagDa
         Log.i("test:", "in LocalDatasource loadAllMemo()" )
         return database.memoDao().loadAllMemo().map {
             memo ->
-                memo.map { Memo(it.id, it.tag, it.title, it.hour, it.minute, it.description)}
+                memo.map { Memo(it.id, it.tag, it.title, it.hour, it.minute, it.description,it.url)}
         }
     }
 
     override fun inputMemo (memo: Memo) {
-        val forInsertMemo = MemoEntity.createForInsert(0, memo.tag, memo.title, memo.hour, memo.minute, memo.description)
+        val forInsertMemo = MemoEntity.createForInsert(0, memo.tag, memo.title, memo.hour, memo.minute, memo.description,memo.url)
         Log.i("test:LocalDatasource", memo.title )
 
         database.memoDao().insert(forInsertMemo)
     }
 
     override fun deleteMemo (memo: Memo) {
-        val forInsertMemo = MemoEntity.createForInsert(memo.id ,memo.tag,  memo.title, memo.hour, memo.minute, memo.description)
+        val forInsertMemo = MemoEntity.createForInsert(memo.id ,memo.tag,  memo.title, memo.hour, memo.minute, memo.description,memo.url)
         Log.i("test:LocalDatasource", memo.title )
 
         database.memoDao().delete(forInsertMemo)
     }
 
     override fun updateMemo (memo: Memo) {
-        val forInsertMemo = MemoEntity.createForInsert(memo.id, memo.tag,   memo.title, memo.hour, memo.minute, memo.description)
+        val forInsertMemo = MemoEntity.createForInsert(memo.id, memo.tag,   memo.title, memo.hour, memo.minute, memo.description,memo.url)
         Log.i("test:LocalDatasource", memo.title )
 
         database.memoDao().updateMemo(forInsertMemo)

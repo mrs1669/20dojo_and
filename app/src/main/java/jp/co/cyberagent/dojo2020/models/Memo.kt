@@ -10,5 +10,6 @@ data class Memo (
     val title: String,
     val hour: Int,
     val minute: Int,
-    val description: String
+    val description: String,
+    val url: String
 ): Parcelable

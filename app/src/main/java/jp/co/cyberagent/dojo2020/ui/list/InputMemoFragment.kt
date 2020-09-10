@@ -59,18 +59,19 @@ class InputMemoFragment : Fragment() {
             val minute = binding.etInputMemoMinute.text.toString().toInt()
             val description = binding.etDescription.text.toString()
             val tag = binding.spInputMemoTag.selectedItem.toString()
+            val url = binding.etUrl.text.toString()
             Log.d("tag in inputFragment", tag)
 
             if (title == null || (hour == 0 && minute == 0) || description == null || minute > 59 || tag == "タグが登録されていません" || tag == null) {
                 Toast.makeText(context, "入力情報が不適切です", Toast.LENGTH_LONG).show()
             } else {
                 var id = memoListViewModel.editMemo.value!!.id
-                val memo = Memo(id ,tag, title, hour.toInt(), minute.toInt(), description)
+                val memo = Memo(id ,tag, title, hour.toInt(), minute.toInt(), description,url)
                 when(id) {
                     0 -> memoListViewModel.saveMemo(memo)
                     else -> memoListViewModel.updateMemo(memo)
                 }
-                memoListViewModel.editMemo.value = Memo(0 ,"","", 0,0,"")
+                memoListViewModel.editMemo.value = Memo(0 ,"","", 0,0,"","")
                 findNavController().navigate(R.id.action_input_memo_data_to_navi_memo_list)
         }
         }

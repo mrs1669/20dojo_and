@@ -34,9 +34,9 @@ class RecyclerMemoAdapter(
 
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
         val memo = memoList[position]
-        holder.binding.viewModel = Memo(memo.id,memo.tag,memo.title,memo.hour,memo.minute,memo.description)
+        holder.binding.viewModel = Memo(memo.id,memo.tag,memo.title,memo.hour,memo.minute,memo.description, memo.url)
         val dialog: DialogViewFragment = DialogViewFragment(memo, listener)
-        holder.binding.viewModel = Memo(memo.id,memo.tag,memo.title,memo.hour,memo.minute,memo.description)
+        holder.binding.viewModel = Memo(memo.id,memo.tag,memo.title,memo.hour,memo.minute,memo.description, memo.url)
 
         holder.itemView.ll_card_all.setOnClickListener{
             listener.getFragmentManager()?.let { manager -> dialog.show(manager, "sample") }

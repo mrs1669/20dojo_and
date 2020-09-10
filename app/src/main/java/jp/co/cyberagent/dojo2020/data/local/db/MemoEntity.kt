@@ -12,17 +12,19 @@ data class MemoEntity(
     @ColumnInfo(name = "title") val title: String,
     @ColumnInfo(name = "hour") val hour: Int,
     @ColumnInfo(name = "minute") val minute: Int,
-    @ColumnInfo(name = "description") val description: String
+    @ColumnInfo(name = "description") val description: String,
+    @ColumnInfo(name = "url") val url: String
 ) {
     companion object {
-        fun createForInsert(id: Int = 0, tag: String, title: String, hour: Int, minute: Int, description: String): MemoEntity {
+        fun createForInsert(id: Int = 0, tag: String, title: String, hour: Int, minute: Int, description: String,url:String): MemoEntity {
             return MemoEntity(
                 id,
                 tag,
                 title,
                 hour,
                 minute,
-                description
+                description,
+                url
             )
         }
     }

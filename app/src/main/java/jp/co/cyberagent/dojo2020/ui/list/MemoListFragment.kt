@@ -63,7 +63,7 @@ class MemoListFragment() : Fragment() {
 
 
         binding.floatingActionButton.setOnClickListener {
-            val memo = Memo(0, "","",0,0,"")
+            val memo = Memo(0, "","",0,0,"","")
             val action = MemoListFragmentDirections.actionNaviMemoListToInputMemoData(memo)
 //            view.findNavController().navigate(action)
             findNavController().navigate(action)
