@@ -17,12 +17,6 @@ class TimerViewModel(application: Application) : AndroidViewModel(application) {
 
     var tempCurrentTimeMills: Int = 0
 
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    fun onCreate() {
-        //val dataStore: SharedPreferences? = TimerViewModel.getPreferences(Context.MODE_PRIVATE)
-    }
-
     fun getCurrentDate(): String? {
         val df: DateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
         val date = Date(System.currentTimeMillis())
