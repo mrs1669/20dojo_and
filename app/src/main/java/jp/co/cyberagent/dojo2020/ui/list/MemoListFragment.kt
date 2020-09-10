@@ -17,6 +17,7 @@ import jp.co.cyberagent.dojo2020.R
 import jp.co.cyberagent.dojo2020.databinding.MemoListTabBinding
 import jp.co.cyberagent.dojo2020.models.Memo
 import jp.co.cyberagent.dojo2020.ui.RecyclerMemoAdapter
+import kotlinx.android.synthetic.main.recyclerview_memo_item.*
 
 class MemoListFragment() : Fragment() {
 
@@ -60,6 +61,7 @@ class MemoListFragment() : Fragment() {
         this.binding = binding
 
         binding.lifecycleOwner = this.viewLifecycleOwner
+
 
         binding.floatingActionButton.setOnClickListener {
             val memo = Memo(0,"",0,0,"")
