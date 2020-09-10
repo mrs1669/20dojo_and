@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
@@ -29,6 +30,9 @@ class MemoListFragment() : Fragment() {
     }
 
     lateinit var adapter: RecyclerMemoAdapter
+    lateinit var manager: FragmentManager
+
+
 
 
 
@@ -44,6 +48,10 @@ class MemoListFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        manager = activity?.supportFragmentManager!!
+
+
 
         memoListViewModel.memoMutableList.observe(viewLifecycleOwner, Observer {
             val adapter = binding.memoRecyclerView.adapter as RecyclerMemoAdapter?
@@ -71,5 +79,7 @@ class MemoListFragment() : Fragment() {
             val action = MemoListFragmentDirections.actionNaviMemoListToInputMemoData(memo)
             view!!.findNavController().navigate(action)
         }
+
+        override fun getFragmentManager() = manager
     }
 }
