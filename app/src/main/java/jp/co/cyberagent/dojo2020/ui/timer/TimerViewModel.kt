@@ -1,16 +1,12 @@
 package jp.co.cyberagent.dojo2020.ui.timer
 
 import android.app.Application
-import android.content.Context
-import android.content.SharedPreferences
 import androidx.lifecycle.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
 class TimerViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val context = getApplication<Application>().applicationContext
 
     private val mutableTimeCountTextViewLiveData: MutableLiveData<String> = MutableLiveData()
     val timeCountTextViewLiveData: LiveData<String> =  mutableTimeCountTextViewLiveData
