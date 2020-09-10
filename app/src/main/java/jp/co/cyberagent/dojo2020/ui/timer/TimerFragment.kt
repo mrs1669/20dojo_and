@@ -50,9 +50,11 @@ class TimerFragment: Fragment(){
 
 
         if(isTimerRunning){
+            startStopButton.setImageResource(android.R.drawable.ic_media_pause) // Set button pause image.
             handler.post(runnable)
         }else{
             startStopButton.setOnClickListener{
+                startStopButton.setImageResource(android.R.drawable.ic_media_pause) // Set button pause image.
                 if (tappedStartButtonFlag == 0){
                     handler.post(runnable)
                     tappedStartButtonFlag = 1
