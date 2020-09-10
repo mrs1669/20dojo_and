@@ -1,18 +1,27 @@
 package jp.co.cyberagent.dojo2020.ui.timer
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
+import androidx.lifecycle.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class TimerViewModel : ViewModel(){
+class TimerViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val context = getApplication<Application>().applicationContext
 
     private val mutableTimeCountTextViewLiveData: MutableLiveData<String> = MutableLiveData()
-    val timeCountTextViewLiveData: LiveData<String> = mutableTimeCountTextViewLiveData
+    val timeCountTextViewLiveData: LiveData<String> =  mutableTimeCountTextViewLiveData
 
     var tempCurrentTimeMills: Int = 0
+
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    fun onCreate() {
+        //val dataStore: SharedPreferences? = TimerViewModel.getPreferences(Context.MODE_PRIVATE)
+    }
 
     fun getCurrentDate(): String? {
         val df: DateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
@@ -54,16 +63,17 @@ class TimerViewModel : ViewModel(){
         }
     }
 
+
     private fun getFormattedElapsedTime(): String{
         return timeToTimeString(getElapsedTimeMills()) ?: "ElapsedTime cannot refer." // try to use Elvis operator.
     }
 
     private fun getFormattedCurrentTime(): String{
-        
+        return ""
     }
 
     fun applyMutableTimeCountTextViewLiveData() {
-        mutableTimeCountTextViewLiveData.value = getFormattedElapsedTime()
+        mutableTimeCountTextViewLiveData.value = getStringElapsedTimeMills()
     }
 
 }
