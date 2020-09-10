@@ -25,6 +25,7 @@ class TimerFragment: Fragment(){
     private var stopTimerViewFlag: Int = 0
 
     private var isTimerRunning: Boolean = false
+    private var isStartFirst: Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -38,6 +39,7 @@ class TimerFragment: Fragment(){
         val dataStore: SharedPreferences? = activity?.getPreferences(Context.MODE_PRIVATE)
 
         isTimerRunning = dataStore?.getBoolean("isTimerRunning", false) ?: false
+        isStartFirst = dataStore?.getBoolean("isStartFirst", true) ?: true
 
         val runnable = object : Runnable {
             override fun run() {
@@ -54,19 +56,40 @@ class TimerFragment: Fragment(){
             handler.post(runnable)
         }else{
             startStopButton.setOnClickListener{
-                startStopButton.setImageResource(android.R.drawable.ic_media_pause) // Set button pause image.
-                isTimerRunning = true
-                if (dataStore != null) {
-                    with(dataStore.edit()) {
-                        putBoolean("isTimerRunning", true) // Set SharedPreferences "isTimerRunning"
-                        apply()
+                if(isTimerRunning){
+                    startStopButton.setImageResource(android.R.drawable.ic_media_play)
+                    isTimerRunning = false
+                    if (dataStore != null) {
+                        with(dataStore.edit()) {
+                            putBoolean("isTimerRunning", false) // Set SharedPreferences "isTimerRunning"
+                            apply()
+                        }
                     }
-                }
-                if (tappedStartButtonFlag == 0){
+                    timerViewModel.setPauseTimeMills()
+                    handler.removeCallbacks(runnable)
+                }else{
+                    startStopButton.setImageResource(android.R.drawable.ic_media_pause) // Set button pause image.
+                    isTimerRunning = true
+                    if (dataStore != null) {
+                        with(dataStore.edit()) {
+                            putBoolean("isTimerRunning", true) // Set SharedPreferences "isTimerRunning"
+                            apply()
+                        }
+                    }
+                    if(isStartFirst){
+                        timerViewModel.setStartTimeMills() // Set start time only first time.
+                        isStartFirst = false
+                        if (dataStore != null) {
+                            with(dataStore.edit()) {
+                                putBoolean("isStartFirst", false) // Set SharedPreferences "isStarFirst"
+                                apply()
+                            }
+                        }
+                    }else{
+                        // Do nothing.
+                    }
                     handler.post(runnable)
-                    tappedStartButtonFlag = 1
                 }
-                timerViewModel.setStartTimeMills()
             }
         }
 

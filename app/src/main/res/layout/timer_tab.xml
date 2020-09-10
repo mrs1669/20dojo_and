@@ -54,20 +54,19 @@
 
         <ImageButton
             android:id="@+id/restartButton"
-            android:layout_width="144dp"
-            android:layout_height="144dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="32dp"
-            android:background="@android:drawable/ic_media_pause"
-            android:backgroundTint="#FF80FF"
             android:contentDescription="@string/timerStopButtonDescription"
             android:scaleType="center"
-            android:tint="#FF0000"
+            android:tint="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="1.0"
+            android:src="@android:drawable/ic_popup_sync" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -12,6 +12,7 @@ class TimerViewModel(application: Application) : AndroidViewModel(application) {
     val timeCountTextViewLiveData: LiveData<String> =  mutableTimeCountTextViewLiveData
 
     var startTimeMills: Int = 0
+    var pauseTimeMills: Int = 0
 
     fun getCurrentDate(): String? {
         val df: DateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
@@ -29,6 +30,10 @@ class TimerViewModel(application: Application) : AndroidViewModel(application) {
 
     fun setStartTimeMills(){
         startTimeMills = getCurrentTimeMills()
+    }
+
+    fun setPauseTimeMills(){
+        pauseTimeMills = getCurrentTimeMills()
     }
 
     private fun getElapsedTimeMills(): Int{
