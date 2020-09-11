@@ -20,13 +20,13 @@ class TimerFragment: Fragment(){
     private val timerViewModel: TimerViewModel by viewModels()
 
     private val handler = Handler()
-    private val initHandler = Handler()
 
     private var isTimerRunning: Boolean = false
     private var isStartFirst: Boolean = true
     private var startTimeMills: Int = 0
     private var pauseTimeStartMills: Int = 0
     private var sumPauseTimeMills: Int = 0
+    private var pauseTimeCountTextView: String = "00:00:00:000"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -44,6 +44,7 @@ class TimerFragment: Fragment(){
         startTimeMills = dataStore?.getInt("startTimeMills", 0) ?: 0
         pauseTimeStartMills = dataStore?.getInt("pauseTimeStartMills",0) ?: 0
         sumPauseTimeMills = dataStore?.getInt("sumPauseTimeMills", 0) ?: 0
+        pauseTimeCountTextView = dataStore?.getString("pauseTimeCountTextView", "00:00:00:000") ?: "00:00:00:000"
 
         println(timerViewModel.getSumPauseTimeMills())
 
@@ -138,7 +139,7 @@ class TimerFragment: Fragment(){
                 }
             }
         } else { // Not running start.
-            timeCountTextView.text = timerViewModel.timeToTimeString(timerViewModel.getTimeMills() - timerViewModel.getPauseTimeMills())
+            timeCountTextView.text = pauseTimeCountTextView
             startStopButton.setOnClickListener {
                 if (isTimerRunning) { // When timer running
                     startStopButton.setImageResource(android.R.drawable.ic_media_play)
@@ -199,11 +200,20 @@ class TimerFragment: Fragment(){
         timerViewModel.timeCountTextViewLiveData.observe(viewLifecycleOwner){
             timeCountTextView.text = it
         }
+        println(pauseTimeCountTextView)
     }
 
-    override fun onPause() {
-        super.onPause()
-        Log.d("pause", timeCountTextView.text.toString())
-
+    override fun onStop() {
+        super.onStop()
+        val dataStore: SharedPreferences? = activity?.getPreferences(Context.MODE_PRIVATE)
+        if (dataStore != null) {
+            with(dataStore.edit()) {
+                putString("pauseTimeCountTextView", timeCountTextView.text.toString())
+                apply()
+            }
+        }
+        pauseTimeCountTextView = timeCountTextView.text.toString()
+        println(pauseTimeCountTextView + "a")
+        Log.d("onStop", "onStop")
     }
 }
