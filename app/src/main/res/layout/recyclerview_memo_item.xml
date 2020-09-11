@@ -119,6 +119,7 @@
                     android:gravity="left"
                     android:text="@{viewModel.url}"
                     android:textSize="15sp"
+                    android:textColor="@color/colorPrimary"
                     />
             </LinearLayout>
 
