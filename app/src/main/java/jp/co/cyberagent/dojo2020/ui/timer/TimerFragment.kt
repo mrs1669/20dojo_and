@@ -64,7 +64,6 @@ class TimerFragment: Fragment(){
         }
 
         restartButton.setOnClickListener {
-            Log.d("restart4", restartButton.isClickable.toString())
             isStartFirst = true
             timerViewModel.init()
             if (dataStore != null) {
@@ -80,9 +79,7 @@ class TimerFragment: Fragment(){
 
         if(isTimerRunning){
             startStopButton.setImageResource(android.R.drawable.ic_media_pause) // Set button pause image.
-            Log.d("restart", restartButton.isClickable.toString())
             restartButton.isClickable = false
-            Log.d("restart2", restartButton.isClickable.toString())
             handler.post(runnable)
             startStopButton.setOnClickListener {
                 if (isTimerRunning) { // When timer running
