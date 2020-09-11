@@ -85,6 +85,10 @@ class TimerViewModel(application: Application) : AndroidViewModel(application) {
         sumPauseTimeMills += getPauseTimeMills()
     }
 
+    fun setSumPauseTimeMills(time: Int){
+        sumPauseTimeMills = time
+    }
+
     fun getSumPauseTimeMills(): Int{
         return sumPauseTimeMills
     }
