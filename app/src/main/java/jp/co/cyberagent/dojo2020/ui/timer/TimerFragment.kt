@@ -83,6 +83,7 @@ class TimerFragment: Fragment(){
             Log.d("restart", restartButton.isClickable.toString())
             restartButton.isClickable = false
             Log.d("restart2", restartButton.isClickable.toString())
+            handler.post(runnable)
             startStopButton.setOnClickListener {
                 if (isTimerRunning) { // When timer running
                     startStopButton.setImageResource(android.R.drawable.ic_media_play)
@@ -99,6 +100,7 @@ class TimerFragment: Fragment(){
                             apply()
                         }
                     }
+                    println("Hello")
                     handler.removeCallbacks(runnable)
                 } else { // When timer not running
                     startStopButton.setImageResource(android.R.drawable.ic_media_pause) // Set button pause image.
@@ -138,7 +140,6 @@ class TimerFragment: Fragment(){
                     handler.post(runnable)
                 }
             }
-            handler.post(runnable)
         } else { // Not running start.
             timeCountTextView.text = timerViewModel.timeToTimeString(timerViewModel.getTimeMills() - timerViewModel.getPauseTimeMills())
             startStopButton.setOnClickListener {
@@ -198,25 +199,14 @@ class TimerFragment: Fragment(){
             }
         }
 
-        Log.d("restart3", restartButton.isClickable.toString())
-
-//        restartButton.setOnClickListener {
-//            Log.d("restart4", restartButton.isClickable.toString())
-//            isStartFirst = true
-//            timerViewModel.init()
-//            if (dataStore != null) {
-//                with(dataStore.edit()) {
-//                    putBoolean("isStartFirst", false) // Set SharedPreferences "isStarFirst"
-//                    putInt("sumPauseTimeMills", 0) // Set SharePreferences "sumPauseTimeMills"
-//                    apply()
-//                }
-//            }
-//            timeCountTextView.text = "00:00:00:000"
-//        }
-        Log.d("restart5", restartButton.isClickable.toString())
-
         timerViewModel.timeCountTextViewLiveData.observe(viewLifecycleOwner){
             timeCountTextView.text = it
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("pause", timeCountTextView.text.toString())
+
     }
 }
