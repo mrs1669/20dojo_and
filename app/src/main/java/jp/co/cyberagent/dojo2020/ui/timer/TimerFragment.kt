@@ -43,6 +43,7 @@ class TimerFragment: Fragment(){
         pauseTimeStartMills = dataStore?.getInt("pauseTimeStartMills",0) ?: 0
         sumPauseTimeMills = dataStore?.getInt("sumPauseTimeMills", 0) ?: 0
 
+        println(timerViewModel.getSumPauseTimeMills())
 
         if(startTimeMills != 0){
             timerViewModel.startTimeMills = this.startTimeMills
@@ -109,7 +110,7 @@ class TimerFragment: Fragment(){
                         timerViewModel.addPauseTimeMills()
                         if (dataStore != null) {
                             with(dataStore.edit()) {
-                                putInt("sumPauseTimeMills", timerViewModel.getCurrentTimeMills())
+                                putInt("sumPauseTimeMills", timerViewModel.getSumPauseTimeMills())
                                 apply()
                             }
                         }
@@ -166,7 +167,7 @@ class TimerFragment: Fragment(){
                         timerViewModel.addPauseTimeMills()
                         if (dataStore != null) {
                             with(dataStore.edit()) {
-                                putInt("sumPauseTimeMills", timerViewModel.getCurrentTimeMills())
+                                putInt("sumPauseTimeMills", timerViewModel.getSumPauseTimeMills())
                                 apply()
                             }
                         }
