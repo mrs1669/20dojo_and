@@ -62,27 +62,56 @@ class TimerFragment: Fragment(){
 
         if(isTimerRunning){
             startStopButton.setImageResource(android.R.drawable.ic_media_pause) // Set button pause image.
-            startStopButton.setOnClickListener{
-                if(isTimerRunning){
+            startStopButton.setOnClickListener {
+                if (isTimerRunning) { // When timer running
                     startStopButton.setImageResource(android.R.drawable.ic_media_play)
                     isTimerRunning = false
                     restartButton.isClickable = true
+                    timerViewModel.setPauseTimeStartMills()
                     if (dataStore != null) {
                         with(dataStore.edit()) {
-                            putBoolean("isTimerRunning", false) // Set SharedPreferences "isTimerRunning"
+                            putBoolean(
+                                "isTimerRunning",
+                                false
+                            ) // Set SharedPreferences "isTimerRunning"
+                            putInt("pauseTimeStartMills", timerViewModel.getCurrentTimeMills())
                             apply()
                         }
                     }
-                    timerViewModel.setPauseTimeStartMills()
                     handler.removeCallbacks(runnable)
-                }else{
+                } else { // When timer not running
                     startStopButton.setImageResource(android.R.drawable.ic_media_pause) // Set button pause image.
                     isTimerRunning = true
                     restartButton.isClickable = false
                     if (dataStore != null) {
                         with(dataStore.edit()) {
-                            putBoolean("isTimerRunning", true) // Set SharedPreferences "isTimerRunning"
+                            putBoolean(
+                                "isTimerRunning",
+                                true
+                            ) // Set SharedPreferences "isTimerRunning"
                             apply()
+                        }
+                    }
+                    if (isStartFirst) {
+                        timerViewModel.setStartTimeMills() // Set start time only first time.
+                        isStartFirst = false
+                        if (dataStore != null) {
+                            with(dataStore.edit()) {
+                                putBoolean(
+                                    "isStartFirst",
+                                    false
+                                ) // Set SharedPreferences "isStarFirst"
+                                putInt("startTimeMills", timerViewModel.getCurrentTimeMills())
+                                apply()
+                            }
+                        }
+                    } else {
+                        timerViewModel.addPauseTimeMills()
+                        if (dataStore != null) {
+                            with(dataStore.edit()) {
+                                putInt("sumPauseTimeMills", timerViewModel.getCurrentTimeMills())
+                                apply()
+                            }
                         }
                     }
                     handler.post(runnable)
