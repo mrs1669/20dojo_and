@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="#DCFFD6"
     android:orientation="vertical">
 
 
@@ -24,12 +24,13 @@
             android:fontFamily="sans-serif-thin"
             android:text="@string/timerCountTextView"
             android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="96sp"
+            android:textColor="@color/colorAccent"
+            android:textSize="54sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,40 +38,39 @@
         android:layout_height="match_parent"
         android:layout_weight="0.6">
 
-        <ImageButton
-            android:id="@+id/startButton"
-            android:layout_width="144dp"
-            android:layout_height="144dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="32dp"
-            android:background="@android:drawable/ic_media_play"
-            android:backgroundTint="#00FFFF"
-            android:contentDescription="@string/timerStartButtonDescription"
-            android:scaleType="centerInside"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/startStopButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:src="@android:drawable/ic_media_play"
+            app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/stopButton"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:rippleColor="@color/colorAccent" />
 
         <ImageButton
-            android:id="@+id/stopButton"
-            android:layout_width="144dp"
-            android:layout_height="144dp"
+            android:id="@+id/restartButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
-            android:background="@android:drawable/ic_media_pause"
-            android:backgroundTint="#FF80FF"
+            android:background="#00FFFFFF"
             android:contentDescription="@string/timerStopButtonDescription"
-            android:scaleType="center"
-            android:tint="#FF0000"
+            android:scaleType="fitCenter"
+            android:src="@android:drawable/ic_popup_sync"
+            android:tint="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/startButton"
+            app:layout_constraintEnd_toStartOf="@+id/startStopButton"
+            app:layout_constraintHorizontal_bias="0.25"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
