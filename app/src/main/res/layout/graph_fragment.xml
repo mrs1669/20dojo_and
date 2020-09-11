@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:padding="10dp"
             app:layout_constraintTop_toTopOf="parent">
 
 
@@ -35,7 +36,7 @@
                     android:layout_width="150dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:text="カテゴリ1"/>
+                    android:text="科目タグ１"/>
                 <Spinner
                     android:id="@+id/spInputMemoTag"
                     android:layout_width="200dp"
@@ -58,7 +59,7 @@
                     android:layout_width="150dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:text="カテゴリ1"/>
+                    android:text="科目タグ２"/>
                 <Spinner
                     android:id="@+id/spInputMemoTag2"
                     android:layout_width="200dp"
@@ -83,7 +84,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
 
-                    android:text="カテゴリ1"/>
+                    android:text="科目タグ３"/>
 
                 <Spinner
                     android:id="@+id/spInputMemoTag3"
@@ -107,7 +108,7 @@
                     android:layout_width="150dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:text="カテゴリ1"/>
+                    android:text="科目タグ４"/>
                 <Spinner
                     android:id="@+id/spInputMemoTag4"
                     android:layout_width="200dp"
@@ -123,10 +124,15 @@
 
         <Button
             android:id="@+id/btShowGraph"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
+            android:height="40dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:background="@drawable/button_corner_round"
+            android:backgroundTint="@color/colorPrimary"
             android:text="グラフを表示"
+            android:textSize="15sp"
+            android:textColor="@color/colorAccentWhite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
