@@ -50,6 +50,8 @@ class TimerFragment: Fragment(){
             timerViewModel.setSumPauseTimeMills(this.sumPauseTimeMills)
         }
 
+        println(timerViewModel.getSumPauseTimeMills())
+
         val runnable = object : Runnable {
             override fun run() {
                 timerViewModel.applyMutableTimeCountTextViewLiveData()
