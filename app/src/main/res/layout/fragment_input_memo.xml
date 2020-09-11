@@ -226,7 +226,11 @@
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
-                        android:text="タグを追加" />
+                        android:text="タグを追加"
+                        android:textSize="15sp"
+                        android:textColor="@color/colorAccentWhite"
+                        android:backgroundTint="@color/colorPrimary"
+                        />
                 </LinearLayout>
 
 
@@ -236,6 +240,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="メモを追加"
+                    android:textSize="15sp"
+                    android:textColor="@color/colorAccentWhite"
+                    android:backgroundTint="@color/colorPrimary"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
