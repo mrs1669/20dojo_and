@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,6 +64,7 @@ class TimerFragment: Fragment(){
 
         if(isTimerRunning){
             startStopButton.setImageResource(android.R.drawable.ic_media_pause) // Set button pause image.
+            restartButton.isClickable = false
             startStopButton.setOnClickListener {
                 if (isTimerRunning) { // When timer running
                     startStopButton.setImageResource(android.R.drawable.ic_media_play)
@@ -187,6 +189,10 @@ class TimerFragment: Fragment(){
                 }
             }
             timeCountTextView.text = "00:00:00:000"
+            Log.d("isStartFirst", isStartFirst.toString())
+            Log.d("startTimeMills", startTimeMills.toString())
+            Log.d("pauseTimeStartMills", pauseTimeStartMills.toString())
+            Log.d("sumPauseTimeMills", sumPauseTimeMills.toString())
         }
 
         timerViewModel.timeCountTextViewLiveData.observe(viewLifecycleOwner){
