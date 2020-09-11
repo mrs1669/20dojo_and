@@ -25,7 +25,7 @@
         <shape android:shape="rectangle">
 
             <!-- 角の丸み -->
-            <corners android:radius="8dp" />
+            <corners android:radius="10dp" />
 
             <!-- グラデーション -->
             <!-- angle:角度、type:linear(=線形) -->
