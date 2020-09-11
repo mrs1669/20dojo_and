@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.anychart.AnyChart
 import com.anychart.AnyChartView
 import com.anychart.chart.common.dataentry.DataEntry
 import com.anychart.chart.common.dataentry.ValueDataEntry
+import jp.co.cyberagent.dojo2020.R
 import jp.co.cyberagent.dojo2020.databinding.ShowFragmentBinding
 
 class ShowGraphFragment  : Fragment() {
@@ -58,6 +60,9 @@ class ShowGraphFragment  : Fragment() {
         pie.data(data)
 
         anyChartView.setChart(pie)
+        binding.floatingActionButton.setOnClickListener{
+            findNavController().navigate(R.id.action_nav_show_graph_to_data_graph)
+        }
         return binding.root
     }
 
