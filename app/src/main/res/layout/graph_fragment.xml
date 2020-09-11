@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -9,20 +10,110 @@
             type="jp.co.cyberagent.dojo2020.ui.graph.GraphViewModel"/>
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.graph.GraphFragment">
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@{Integer.toString(viewModel.graphDataArray.graphDataArray[1].time)}" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text= "@{`this value is`+ viewModel.graphDataArray.graphDataArray[1].tag}" />
 
-    </FrameLayout>
+        <Button
+            android:id="@+id/btShowGraph"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="グラフを表示"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout">
+
+            <TextView
+                android:id="@+id/tvTag1"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="@{Integer.toString(viewModel.data1)}"
+                android:minWidth="120dp"/>
+
+            <TextView
+                android:id="@+id/tvTag2"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="@{Integer.toString(viewModel.data2)}"
+                android:minWidth="120dp" />
+
+            <TextView
+                android:id="@+id/tvTag3"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="@{Integer.toString(viewModel.data3)}"
+                android:minWidth="120dp"/>
+
+            <TextView
+                android:id="@+id/tvTag4"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="@{Integer.toString(viewModel.data4)}"
+                android:minWidth="120dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <Spinner
+                android:id="@+id/spInputMemoTag"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:entries="@{viewModel.tagMutableList}"
+                android:minWidth="120dp"
+                android:orientation="vertical" />
+
+            <Spinner
+                android:id="@+id/spInputMemoTag2"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:entries="@{viewModel.tagMutableList}"
+                android:minWidth="120dp"
+                android:orientation="vertical" />
+
+            <Spinner
+                android:id="@+id/spInputMemoTag3"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:entries="@{viewModel.tagMutableList}"
+                android:minWidth="120dp"
+                android:orientation="vertical" />
+
+            <Spinner
+                android:id="@+id/spInputMemoTag4"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:entries="@{viewModel.tagMutableList}"
+                android:minWidth="120dp"
+                android:orientation="vertical" />
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

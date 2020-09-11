@@ -79,5 +79,8 @@ dependencies {
     // safeargs
     apply plugin: "androidx.navigation.safeargs.kotlin"
 
+    //MPAndroidChart
+//    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'com.github.AnyChart:AnyChart-Android:1.0.6'
 }
 
