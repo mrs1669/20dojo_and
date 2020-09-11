@@ -51,7 +51,7 @@ class TimerViewModel(application: Application) : AndroidViewModel(application) {
         return getElapsedTimeMills().toString()
     }
 
-    private fun timeToTimeString(time: Int = 0): String? {
+    fun timeToTimeString(time: Int = 0): String? {
         return if (time < 0) {
             null // if time smaller than 0 to null
         } else if (time == 0) {

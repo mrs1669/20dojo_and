@@ -20,6 +20,7 @@ class TimerFragment: Fragment(){
     private val timerViewModel: TimerViewModel by viewModels()
 
     private val handler = Handler()
+    private val initHandler = Handler()
 
     private var isTimerRunning: Boolean = false
     private var isStartFirst: Boolean = true
@@ -57,14 +58,31 @@ class TimerFragment: Fragment(){
         val runnable = object : Runnable {
             override fun run() {
                 timerViewModel.applyMutableTimeCountTextViewLiveData()
-                handler.postDelayed(this, 36)  // 36ｍｓ後に自分にpost
+                // timeCountTextView.text = timerViewModel.getCurrentDate()
+                handler.postDelayed(this, 1)  // 36ｍｓ後に自分にpost
             }
+        }
+
+        restartButton.setOnClickListener {
+            Log.d("restart4", restartButton.isClickable.toString())
+            isStartFirst = true
+            timerViewModel.init()
+            if (dataStore != null) {
+                with(dataStore.edit()) {
+                    putBoolean("isStartFirst", false) // Set SharedPreferences "isStarFirst"
+                    putInt("sumPauseTimeMills", 0) // Set SharePreferences "sumPauseTimeMills"
+                    apply()
+                }
+            }
+            timeCountTextView.text = "00:00:00:000"
         }
 
 
         if(isTimerRunning){
             startStopButton.setImageResource(android.R.drawable.ic_media_pause) // Set button pause image.
+            Log.d("restart", restartButton.isClickable.toString())
             restartButton.isClickable = false
+            Log.d("restart2", restartButton.isClickable.toString())
             startStopButton.setOnClickListener {
                 if (isTimerRunning) { // When timer running
                     startStopButton.setImageResource(android.R.drawable.ic_media_play)
@@ -121,7 +139,8 @@ class TimerFragment: Fragment(){
                 }
             }
             handler.post(runnable)
-        }else { // Not running start.
+        } else { // Not running start.
+            timeCountTextView.text = timerViewModel.timeToTimeString(timerViewModel.getTimeMills() - timerViewModel.getPauseTimeMills())
             startStopButton.setOnClickListener {
                 if (isTimerRunning) { // When timer running
                     startStopButton.setImageResource(android.R.drawable.ic_media_play)
@@ -179,22 +198,22 @@ class TimerFragment: Fragment(){
             }
         }
 
-        restartButton.setOnClickListener {
-            isStartFirst = true
-            timerViewModel.init()
-            if (dataStore != null) {
-                with(dataStore.edit()) {
-                    putBoolean("isStartFirst", false) // Set SharedPreferences "isStarFirst"
-                    putInt("sumPauseTimeMills", 0) // Set SharePreferences "sumPauseTimeMills"
-                    apply()
-                }
-            }
-            timeCountTextView.text = "00:00:00:000"
-            Log.d("isStartFirst", isStartFirst.toString())
-            Log.d("startTimeMills", startTimeMills.toString())
-            Log.d("pauseTimeStartMills", pauseTimeStartMills.toString())
-            Log.d("sumPauseTimeMills", sumPauseTimeMills.toString())
-        }
+        Log.d("restart3", restartButton.isClickable.toString())
+
+//        restartButton.setOnClickListener {
+//            Log.d("restart4", restartButton.isClickable.toString())
+//            isStartFirst = true
+//            timerViewModel.init()
+//            if (dataStore != null) {
+//                with(dataStore.edit()) {
+//                    putBoolean("isStartFirst", false) // Set SharedPreferences "isStarFirst"
+//                    putInt("sumPauseTimeMills", 0) // Set SharePreferences "sumPauseTimeMills"
+//                    apply()
+//                }
+//            }
+//            timeCountTextView.text = "00:00:00:000"
+//        }
+        Log.d("restart5", restartButton.isClickable.toString())
 
         timerViewModel.timeCountTextViewLiveData.observe(viewLifecycleOwner){
             timeCountTextView.text = it
