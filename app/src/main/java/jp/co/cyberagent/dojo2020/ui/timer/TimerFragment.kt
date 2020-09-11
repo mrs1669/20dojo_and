@@ -23,6 +23,7 @@ class TimerFragment: Fragment(){
     private var isTimerRunning: Boolean = false
     private var isStartFirst: Boolean = true
     private var startTimeMills: Int = 0
+    private var pauseTimeStartMills: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -38,9 +39,12 @@ class TimerFragment: Fragment(){
         isTimerRunning = dataStore?.getBoolean("isTimerRunning", false) ?: false
         isStartFirst = dataStore?.getBoolean("isStartFirst", true) ?: true
         startTimeMills = dataStore?.getInt("startTimeMills", 0) ?: 0
+        pauseTimeStartMills = dataStore?.getInt("pauseTimeStartMills",0) ?: 0
+
 
         if(startTimeMills != 0){
             timerViewModel.startTimeMills = this.startTimeMills
+            timerViewModel.pauseTimeStartMills = this.pauseTimeStartMills
         }
 
         val runnable = object : Runnable {
@@ -86,7 +90,7 @@ class TimerFragment: Fragment(){
                     startStopButton.setImageResource(android.R.drawable.ic_media_play)
                     isTimerRunning = false
                     restartButton.isClickable = true
-                    println(timerViewModel.pauseTimeStartMills)
+                    timerViewModel.setPauseTimeStartMills()
                     if (dataStore != null) {
                         with(dataStore.edit()) {
                             putBoolean("isTimerRunning", false) // Set SharedPreferences "isTimerRunning"
@@ -117,6 +121,8 @@ class TimerFragment: Fragment(){
                         }
                     }else{
 
+                        timerViewModel.addPauseTimeMills()
+                        println(timerViewModel.getSumPauseTimeMills())
                     }
                     handler.post(runnable)
                 }
@@ -125,6 +131,7 @@ class TimerFragment: Fragment(){
 
         restartButton.setOnClickListener {
             isStartFirst = true
+            timerViewModel.init()
             if (dataStore != null) {
                 with(dataStore.edit()) {
                     putBoolean("isStartFirst", false) // Set SharedPreferences "isStarFirst"

@@ -13,6 +13,13 @@ class TimerViewModel(application: Application) : AndroidViewModel(application) {
 
     var startTimeMills: Int = 0
     var pauseTimeStartMills: Int = 0
+    private var sumPauseTimeMills: Int = 0
+
+    fun init(){
+        startTimeMills = 0
+        pauseTimeStartMills = 0
+        sumPauseTimeMills = 0
+    }
 
     fun getCurrentDate(): String? {
         val df: DateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
@@ -66,12 +73,20 @@ class TimerViewModel(application: Application) : AndroidViewModel(application) {
         return ""
     }
 
-    private fun getPauseTimeMills(): Int{
+    fun getPauseTimeMills(): Int{
         return getCurrentTimeMills() - pauseTimeStartMills
     }
 
-    private fun getTimeMills(): Int{
-        return getElapsedTimeMills() - getPauseTimeMills()
+    fun getTimeMills(): Int{
+        return getElapsedTimeMills() - getSumPauseTimeMills()
+    }
+
+    fun addPauseTimeMills(){
+        sumPauseTimeMills += getPauseTimeMills()
+    }
+
+    fun getSumPauseTimeMills(): Int{
+        return sumPauseTimeMills
     }
 
     private fun getFormattedTime(): String{
@@ -79,7 +94,7 @@ class TimerViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun applyMutableTimeCountTextViewLiveData() {
-        mutableTimeCountTextViewLiveData.value = getFormattedElapsedTime()
+        mutableTimeCountTextViewLiveData.value = getFormattedTime()
     }
 
 }
