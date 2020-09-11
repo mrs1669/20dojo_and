@@ -185,6 +185,7 @@ class TimerFragment: Fragment(){
             if (dataStore != null) {
                 with(dataStore.edit()) {
                     putBoolean("isStartFirst", false) // Set SharedPreferences "isStarFirst"
+                    putInt("sumPauseTimeMills", 0) // Set SharePreferences "sumPauseTimeMills"
                     apply()
                 }
             }
