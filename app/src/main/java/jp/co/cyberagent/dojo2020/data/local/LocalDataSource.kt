@@ -10,6 +10,7 @@ import jp.co.cyberagent.dojo2020.data.local.db.MemoEntity
 import jp.co.cyberagent.dojo2020.data.local.db.TagEntity
 import jp.co.cyberagent.dojo2020.models.Memo
 import jp.co.cyberagent.dojo2020.models.Tag
+import jp.co.cyberagent.dojo2020.models.Time
 
 
 class LocalDataSource (private val database: AppDatabase): MemoDataSource, TagDataSource {
@@ -42,12 +43,18 @@ class LocalDataSource (private val database: AppDatabase): MemoDataSource, TagDa
         database.memoDao().updateMemo(forInsertMemo)
     }
 
+    override fun selectGraphData(tagName: String):List<Time> {
+        Log.i("selectGraphData", tagName )
+        return database.memoDao().selectGraphData(tagName)
+    }
+
     override fun loadAllTag(): LiveData<List<Tag>> {
         return database.tagDao().loadAllTag().map {
                 tag ->
             tag.map { Tag(it.tag)}
         }
     }
+
 
     override fun inputTag(tag: Tag) {
         val forInsertTag = TagEntity.createForInsert(tag.tag)

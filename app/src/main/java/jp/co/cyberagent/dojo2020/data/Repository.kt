@@ -2,9 +2,11 @@ package jp.co.cyberagent.dojo2020.data
 
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.map
 import jp.co.cyberagent.dojo2020.data.local.LocalDataSource
-import jp.co.cyberagent.dojo2020.models.Memo
-import jp.co.cyberagent.dojo2020.models.Tag
+import jp.co.cyberagent.dojo2020.models.*
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 interface Repository {
     suspend fun inputMemo(memo: Memo)
@@ -13,6 +15,7 @@ interface Repository {
     suspend fun updateMemo(memo: Memo)
     suspend fun inputTag(tag: Tag)
     fun loadAllTag(): LiveData<List<Tag>>
+    suspend fun selectGraphData(tagName: String): List<Time>
 }
 
 class DefaultRepository(
@@ -44,5 +47,9 @@ class DefaultRepository(
     override fun loadAllTag(): LiveData<List<Tag>> {
         val localTagList = localDataSource.loadAllTag()
         return localTagList
+    }
+
+    override suspend fun selectGraphData(tagName: String): List<Time> {
+        return localDataSource.selectGraphData(tagName)
     }
 }

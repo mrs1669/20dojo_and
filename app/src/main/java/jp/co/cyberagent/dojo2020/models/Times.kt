@@ -4,7 +4,6 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class GraphData (
-    val time: Int,
-    val tag: String
+data class Times (
+    val times: MutableList<GraphData>
 ): Parcelable

@@ -20,7 +20,11 @@
     <fragment
         android:id="@+id/data_graph"
         android:name="jp.co.cyberagent.dojo2020.ui.graph.GraphFragment"
-        android:label="Fragment5"/>
+        android:label="Fragment5">
+        <action
+            android:id="@+id/action_data_graph_to_nav_show_graph"
+            app:destination="@id/nav_show_graph" />
+    </fragment>
 
     <fragment
         android:id="@+id/navi_timer"
@@ -31,6 +35,19 @@
         android:id="@+id/navi_profile"
         android:name="jp.co.cyberagent.dojo2020.ProfileFragment"
         android:label="Fragment3"/>
+
+    <fragment
+        android:id="@+id/nav_show_graph"
+        android:name="jp.co.cyberagent.dojo2020.ui.graph.ShowGraphFragment"
+        android:label="show_grap">
+        <argument
+            android:name="ShowGraph"
+            app:argType="jp.co.cyberagent.dojo2020.models.Times"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_nav_show_graph_to_data_graph"
+            app:destination="@id/data_graph" />
+    </fragment>
 
     <fragment
         android:id="@+id/input_memo_data"

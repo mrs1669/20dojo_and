@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.savedstate.SavedStateRegistryOwner
 
 @Suppress("UNCHECKED_CAST")
-class GraphModelFactory (
+class GraphViewModelFactory (
     private val context: Context
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(
