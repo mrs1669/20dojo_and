@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+    <!-- ボタンが押されていない状態 -->
+    <item android:state_pressed="false">
+        <!-- 四角形 -->
+        <shape android:shape="rectangle">
+
+            <!-- 角の丸み -->
+            <corners android:radius="8dp" />
+
+            <solid android:color="@color/colorPrimary"/>
+
+            <!-- グラデーション -->
+            <!-- angle:角度、type:linear(=線形) -->
+
+        </shape>
+    </item>
+
+    <!-- ボタンが押された状態 -->
+    <item android:state_pressed="true">
+        <!-- 四角形 -->
+        <shape android:shape="rectangle">
+
+            <!-- 角の丸み -->
+            <corners android:radius="8dp" />
+
+            <!-- グラデーション -->
+            <!-- angle:角度、type:linear(=線形) -->
+
+        </shape>
+    </item>
+
+</selector>
