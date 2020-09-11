@@ -20,6 +20,7 @@ class TimerFragment: Fragment(){
     private val timerViewModel: TimerViewModel by viewModels()
 
     private val handler = Handler()
+    private val initHandler = Handler()
 
     private var isTimerRunning: Boolean = false
     private var isStartFirst: Boolean = true
@@ -57,125 +58,8 @@ class TimerFragment: Fragment(){
         val runnable = object : Runnable {
             override fun run() {
                 timerViewModel.applyMutableTimeCountTextViewLiveData()
-                handler.postDelayed(this, 36)  // 36ｍｓ後に自分にpost
-            }
-        }
-
-
-        if(isTimerRunning){
-            startStopButton.setImageResource(android.R.drawable.ic_media_pause) // Set button pause image.
-            restartButton.isClickable = false
-            startStopButton.setOnClickListener {
-                if (isTimerRunning) { // When timer running
-                    startStopButton.setImageResource(android.R.drawable.ic_media_play)
-                    isTimerRunning = false
-                    restartButton.isClickable = true
-                    timerViewModel.setPauseTimeStartMills()
-                    if (dataStore != null) {
-                        with(dataStore.edit()) {
-                            putBoolean(
-                                "isTimerRunning",
-                                false
-                            ) // Set SharedPreferences "isTimerRunning"
-                            putInt("pauseTimeStartMills", timerViewModel.getCurrentTimeMills())
-                            apply()
-                        }
-                    }
-                    handler.removeCallbacks(runnable)
-                } else { // When timer not running
-                    startStopButton.setImageResource(android.R.drawable.ic_media_pause) // Set button pause image.
-                    isTimerRunning = true
-                    restartButton.isClickable = false
-                    if (dataStore != null) {
-                        with(dataStore.edit()) {
-                            putBoolean(
-                                "isTimerRunning",
-                                true
-                            ) // Set SharedPreferences "isTimerRunning"
-                            apply()
-                        }
-                    }
-                    if (isStartFirst) {
-                        timerViewModel.setStartTimeMills() // Set start time only first time.
-                        isStartFirst = false
-                        if (dataStore != null) {
-                            with(dataStore.edit()) {
-                                putBoolean(
-                                    "isStartFirst",
-                                    false
-                                ) // Set SharedPreferences "isStarFirst"
-                                putInt("startTimeMills", timerViewModel.getCurrentTimeMills())
-                                apply()
-                            }
-                        }
-                    } else {
-                        timerViewModel.addPauseTimeMills()
-                        if (dataStore != null) {
-                            with(dataStore.edit()) {
-                                putInt("sumPauseTimeMills", timerViewModel.getSumPauseTimeMills())
-                                apply()
-                            }
-                        }
-                    }
-                    handler.post(runnable)
-                }
-            }
-            handler.post(runnable)
-        }else { // Not running start.
-            startStopButton.setOnClickListener {
-                if (isTimerRunning) { // When timer running
-                    startStopButton.setImageResource(android.R.drawable.ic_media_play)
-                    isTimerRunning = false
-                    restartButton.isClickable = true
-                    timerViewModel.setPauseTimeStartMills()
-                    if (dataStore != null) {
-                        with(dataStore.edit()) {
-                            putBoolean(
-                                "isTimerRunning",
-                                false
-                            ) // Set SharedPreferences "isTimerRunning"
-                            putInt("pauseTimeStartMills", timerViewModel.getCurrentTimeMills())
-                            apply()
-                        }
-                    }
-                    handler.removeCallbacks(runnable)
-                } else { // When timer not running
-                    startStopButton.setImageResource(android.R.drawable.ic_media_pause) // Set button pause image.
-                    isTimerRunning = true
-                    restartButton.isClickable = false
-                    if (dataStore != null) {
-                        with(dataStore.edit()) {
-                            putBoolean(
-                                "isTimerRunning",
-                                true
-                            ) // Set SharedPreferences "isTimerRunning"
-                            apply()
-                        }
-                    }
-                    if (isStartFirst) {
-                        timerViewModel.setStartTimeMills() // Set start time only first time.
-                        isStartFirst = false
-                        if (dataStore != null) {
-                            with(dataStore.edit()) {
-                                putBoolean(
-                                    "isStartFirst",
-                                    false
-                                ) // Set SharedPreferences "isStarFirst"
-                                putInt("startTimeMills", timerViewModel.getCurrentTimeMills())
-                                apply()
-                            }
-                        }
-                    } else {
-                        timerViewModel.addPauseTimeMills()
-                        if (dataStore != null) {
-                            with(dataStore.edit()) {
-                                putInt("sumPauseTimeMills", timerViewModel.getSumPauseTimeMills())
-                                apply()
-                            }
-                        }
-                    }
-                    handler.post(runnable)
-                }
+                // timeCountTextView.text = timerViewModel.getCurrentDate()
+                handler.postDelayed(this, 1)  // 36ｍｓ後に自分にpost
             }
         }
 
@@ -190,14 +74,136 @@ class TimerFragment: Fragment(){
                 }
             }
             timeCountTextView.text = "00:00:00:000"
-            Log.d("isStartFirst", isStartFirst.toString())
-            Log.d("startTimeMills", startTimeMills.toString())
-            Log.d("pauseTimeStartMills", pauseTimeStartMills.toString())
-            Log.d("sumPauseTimeMills", sumPauseTimeMills.toString())
+        }
+
+
+        if(isTimerRunning){
+            startStopButton.setImageResource(android.R.drawable.ic_media_pause) // Set button pause image.
+            restartButton.isClickable = false
+            handler.post(runnable)
+            startStopButton.setOnClickListener {
+                if (isTimerRunning) { // When timer running
+                    startStopButton.setImageResource(android.R.drawable.ic_media_play)
+                    isTimerRunning = false
+                    restartButton.isClickable = true
+                    timerViewModel.setPauseTimeStartMills()
+                    if (dataStore != null) {
+                        with(dataStore.edit()) {
+                            putBoolean(
+                                "isTimerRunning",
+                                false
+                            ) // Set SharedPreferences "isTimerRunning"
+                            putInt("pauseTimeStartMills", timerViewModel.getCurrentTimeMills())
+                            apply()
+                        }
+                    }
+                    println("Hello")
+                    handler.removeCallbacks(runnable)
+                } else { // When timer not running
+                    startStopButton.setImageResource(android.R.drawable.ic_media_pause) // Set button pause image.
+                    isTimerRunning = true
+                    restartButton.isClickable = false
+                    if (dataStore != null) {
+                        with(dataStore.edit()) {
+                            putBoolean(
+                                "isTimerRunning",
+                                true
+                            ) // Set SharedPreferences "isTimerRunning"
+                            apply()
+                        }
+                    }
+                    if (isStartFirst) {
+                        timerViewModel.setStartTimeMills() // Set start time only first time.
+                        isStartFirst = false
+                        if (dataStore != null) {
+                            with(dataStore.edit()) {
+                                putBoolean(
+                                    "isStartFirst",
+                                    false
+                                ) // Set SharedPreferences "isStarFirst"
+                                putInt("startTimeMills", timerViewModel.getCurrentTimeMills())
+                                apply()
+                            }
+                        }
+                    } else {
+                        timerViewModel.addPauseTimeMills()
+                        if (dataStore != null) {
+                            with(dataStore.edit()) {
+                                putInt("sumPauseTimeMills", timerViewModel.getSumPauseTimeMills())
+                                apply()
+                            }
+                        }
+                    }
+                    handler.post(runnable)
+                }
+            }
+        } else { // Not running start.
+            timeCountTextView.text = timerViewModel.timeToTimeString(timerViewModel.getTimeMills() - timerViewModel.getPauseTimeMills())
+            startStopButton.setOnClickListener {
+                if (isTimerRunning) { // When timer running
+                    startStopButton.setImageResource(android.R.drawable.ic_media_play)
+                    isTimerRunning = false
+                    restartButton.isClickable = true
+                    timerViewModel.setPauseTimeStartMills()
+                    if (dataStore != null) {
+                        with(dataStore.edit()) {
+                            putBoolean(
+                                "isTimerRunning",
+                                false
+                            ) // Set SharedPreferences "isTimerRunning"
+                            putInt("pauseTimeStartMills", timerViewModel.getCurrentTimeMills())
+                            apply()
+                        }
+                    }
+                    handler.removeCallbacks(runnable)
+                } else { // When timer not running
+                    startStopButton.setImageResource(android.R.drawable.ic_media_pause) // Set button pause image.
+                    isTimerRunning = true
+                    restartButton.isClickable = false
+                    if (dataStore != null) {
+                        with(dataStore.edit()) {
+                            putBoolean(
+                                "isTimerRunning",
+                                true
+                            ) // Set SharedPreferences "isTimerRunning"
+                            apply()
+                        }
+                    }
+                    if (isStartFirst) {
+                        timerViewModel.setStartTimeMills() // Set start time only first time.
+                        isStartFirst = false
+                        if (dataStore != null) {
+                            with(dataStore.edit()) {
+                                putBoolean(
+                                    "isStartFirst",
+                                    false
+                                ) // Set SharedPreferences "isStarFirst"
+                                putInt("startTimeMills", timerViewModel.getCurrentTimeMills())
+                                apply()
+                            }
+                        }
+                    } else {
+                        timerViewModel.addPauseTimeMills()
+                        if (dataStore != null) {
+                            with(dataStore.edit()) {
+                                putInt("sumPauseTimeMills", timerViewModel.getSumPauseTimeMills())
+                                apply()
+                            }
+                        }
+                    }
+                    handler.post(runnable)
+                }
+            }
         }
 
         timerViewModel.timeCountTextViewLiveData.observe(viewLifecycleOwner){
             timeCountTextView.text = it
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("pause", timeCountTextView.text.toString())
+
     }
 }
